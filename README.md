@@ -4,9 +4,10 @@
 
 ## 목차
 
-1. 자연어처리 소개 및 분석과정 [(자료)](./documents/01\.%20NLP%20-%20자연어처리%20소개%20및%20분석과정.pptx)
-1. 비정형 데이터 - HTTP, Urllib, Requests [(자료)](./documents/02\.%20HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pptx) [(Code)](HTTP.ipynb)
-1. git Advanced 특강 [(자료1)](./documents/오픈소스개발방식_QA통합_git_advanced.pdf) [(자료2)](./documents/Git-training-v3.pdf)
+1. 자연어처리 소개 및 분석과정 ([자료](./documents/01\.%20NLP%20-%20자연어처리%20소개%20및%20분석과정.pptx))
+1. 비정형 데이터 - HTTP, Urllib, Requests ([자료](./documents/02\.%20HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pptx)) ([Code](HTTP.ipynb))
+1. git Advanced 특강 ([자료1](./documents/오픈소스개발방식_QA통합_git_advanced.pdf)) ([자료2](./documents/Git-training-v3.pdf))
+1. Cookie / Session ([자료](./documents/04.%2020190307(인공지능%20고급반)%20-%20cookie_session.html)) ([Code](HTTP.ipynb), 끝부분)
 1. 웹 크롤링 - DOM
 1. 웹 크롤링 - Selector
 1. 웹 스크래핑 - 정적 콘텐츠
