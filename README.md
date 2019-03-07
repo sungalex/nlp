@@ -4,8 +4,9 @@
 
 ## 목차
 
-1. 자연어처리 소개 및 분석과정[(자료)](./documents/aaa.pptx)
-1. 비정형 데이터 - HTTP, Urllib, Requests
+1. 자연어처리 소개 및 분석과정 [(자료)](./documents/01\.%20NLP%20-%20자연어처리%20소개%20및%20분석과정.pptx)
+1. git Advanced 특강 [(자료1)](./documents/오픈소스개발방식_QA통합_git_advanced.pdf) [(자료2)](./documents/Git-training-v3.pdf)
+1. 비정형 데이터 - HTTP, Urllib, Requests [(자료)](./documents/02\.%20HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pptx) [(Code)](HTTP.ipynb)
 1. Git Advanced
 1. 웹 크롤링 - DOM
 1. 웹 크롤링 - Selector
@@ -45,3 +46,4 @@
 1. RNN(LSTM) - 기계번역
 1. 딥러닝을 이용한 자연어처리 활용
 
+강의 계획 기준으로 목차를 작성하였습니다. 실제 강의 내용을 반영하여 목차 수정 및 자료 업데이트 예정입니다.
