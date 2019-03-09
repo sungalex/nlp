@@ -7,8 +7,21 @@ import requests
 from functions.download import getDownload
 from bs4 import BeautifulSoup
 
-# from functions.download import postDownload
-# from functions.download import putSubmit
+googleUrl = "http://www.google.com/search"
+naverUrl = "https://search.naver.com/search.naver"
+daumUrl = "https://search.daum.net/search"
+
+params = {
+    "google": {
+        "q": searchString
+    },
+    "naver": {
+        "query": searchString
+    },
+    "daum": {
+        "q": searchString
+    }
+}
 
 
 def googleSearchTitleList(searchString=None):
@@ -24,8 +37,7 @@ def googleSearchTitleList(searchString=None):
 
     searchString : 검색할 문자열(String)
     '''
-    url = "http://www.google.com/search"
-    html = getDownload(url, params={"q": searchString})
+    html = getDownload(googleUrl, params=params["google"])
 
     dom = BeautifulSoup(html.text, "lxml")
     tags = dom.find_all("div", {"class": "r"})
@@ -59,9 +71,7 @@ def naverSearchTitleList(searchString=None):
 
     return 값은 섹션별로 제목 리스트를 포함하고 있는 List(2차원 배열) 입니다.
     '''
-    url = "https://search.naver.com/search.naver"
-
-    html = getDownload(url, params={"query": searchString})
+    html = getDownload(naverUrl, params=params["naver"])
     dom = BeautifulSoup(html.text, "lxml")
     ulTags = dom.find_all("", {"class": "type01"})
 
@@ -76,7 +86,7 @@ def naverSearchTitleList(searchString=None):
     return result
 
 
-def daumSearchTitleList(searchString):
+def daumSearchTitleList(searchString=None):
     '''
     이 함수는 다음 포탈에서 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -94,9 +104,7 @@ def daumSearchTitleList(searchString):
 
     searchString: 검색할 문자열(String)
     '''
-    url = "https://search.daum.net/search"
-
-    html = getDownload(url, params={"q": searchString})
+    html = getDownload(daumUrl, params=params["daum"])
     dom = BeautifulSoup(html.text, "lxml")
     divTags = dom.find_all("", {"class": "mg_tit"})
 
@@ -131,19 +139,19 @@ def getSearchTitleList(portal="google", searchString=None):
     return resp
 
 
-def googleSearchUrlList():
+def googleSearchUrlList(searchString=None):
     pass
 
 
-def naverSearchUrlList():
+def naverSearchUrlList(searchString=None):
     pass
 
 
-def daumSearchUrlList():
+def daumSearchUrlList(searchString=None):
     pass
 
 
-def getSearchUrlList():
+def getSearchUrlList(portal="google", searchString=None):
     pass
 
 
@@ -155,18 +163,14 @@ def getSearchDOM(portal="google", searchString=None):
     portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
     searchString: 검색할 문자열(String)
     '''
-    googleUrl = "http://www.google.com/search"
-    naverUrl = "https://search.naver.com/search.naver"
-    daumUrl = "https://search.daum.net/search"
-
     portal = portal.lower()
 
     if portal in ["google", "g"]:
-        html = getDownload(googleUrl, params={"q": searchString})
+        html = getDownload(googleUrl, params=params["google"])
     elif portal in ["naver", "n"]:
-        html = getDownload(naverUrl, params={"query": searchString})
+        html = getDownload(naverUrl, params=params["naver"])
     elif portal in ["daum", "d"]:
-        html = getDownload(daumUrl, params={"q": searchString})
+        html = getDownload(daumUrl, params=params["daum"])
     else:
         html = []
 
