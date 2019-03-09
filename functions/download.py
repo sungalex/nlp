@@ -1,5 +1,7 @@
-# download 모듈은 requests 패키지를 이용해 웹에서 컨텐츠를 다운로드 하는
-# 함수들을 포함하고 있다.
+'''
+download 모듈은 requests 패키지를 이용해 웹에서 컨텐츠를 다운로드 하는
+함수들을 포함하고 있습니다.
+'''
 
 import requests
 from requests.exceptions import HTTPError
@@ -20,6 +22,9 @@ base_retries = 3
 # get Method 방식으로 웹 컨텐츠를 다운로드 하는 함수
 def getDownload(url, params=None, headers=header, retries=base_retries):
     '''
+    이 함수는 지정한 url에 get Method 방식으로 params의 Query String을
+    전달하고 그 결과(Response)를 Return 합니다.
+
     url: 다운로드 할 웹 페이지 URL(String)
     params: 웹 페이지에 get Method 방식으로 전달할 Query String(Dictionary)
     headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
@@ -44,9 +49,17 @@ def getDownload(url, params=None, headers=header, retries=base_retries):
 
     return resp
 
+
 # post Method 방식으로 웹 컨텐츠를 다운로드 하는 함수
-def postDownload(url, data=None, cookie=None, headers=header, retries=base_retries):
+def postDownload(url,
+                 data=None,
+                 cookie=None,
+                 headers=header,
+                 retries=base_retries):
     '''
+    이 함수는 지정한 url에 post Method 방식으로 data의 Submit Dictionary를
+    전달하고 그 결과(Response)를 Return 합니다.
+
     url: 다운로드 할 웹 페이지 URL(String)
     data: 웹 페이지에 post Method 방식으로 전달할 submit data(Dictionary)
     cookie: 웹 페이지에 전달할 쿠기 정보(String)
@@ -72,3 +85,11 @@ def postDownload(url, data=None, cookie=None, headers=header, retries=base_retri
 
     return resp
 
+
+# put Method 방식으로 웹 컨텐츠를 수정하는 함수
+def putSubmit(url, data=None, cookie=None, headers=header,
+              retries=base_retries):
+    '''
+    To-Do
+    '''
+    pass
