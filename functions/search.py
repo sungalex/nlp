@@ -107,6 +107,28 @@ def daumSearchTitleList(searchString):
     return result
 
 
+def getSearchTitleList(portal="google", searchString=None):
+    '''
+    지정한 검색 포탈에서 지정한 문자열을 찾은 후 검색결과 중 제목 List를 Return
+    합니다.
+
+    portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
+    searchString: 검색할 문자열(String)
+    '''
+    portal = portal.lower()
+
+    if portal in ["google", "g"]:
+        resp = googleSearchTitleList(searchString)
+    elif portal in ["naver", "n"]:
+        resp = naverSearchTitleList(searchString)
+    elif portal in ["daum", "d"]:
+        resp = daumSearchTitleList(searchString)
+    else:
+        resp = []
+        print('portal은 "google", "g", "naver", "n", "daum", "d" 중 하나를 지정하세요.')
+
+    return resp
+
 def googleSearchUrlList():
     pass
 
