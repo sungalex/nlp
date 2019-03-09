@@ -5,9 +5,10 @@ search 모듈은 download 모듈을 이용하여 포탈 사이트의 검색결�
 
 import requests
 from functions.download import getDownload
-from functions.download import postDownload
-from functions.download import putSubmit
 from bs4 import BeautifulSoup
+
+# from functions.download import postDownload
+# from functions.download import putSubmit
 
 
 def googleSearchTitleList(searchString=None):
@@ -129,6 +130,7 @@ def getSearchTitleList(portal="google", searchString=None):
 
     return resp
 
+
 def googleSearchUrlList():
     pass
 
@@ -139,3 +141,38 @@ def naverSearchUrlList():
 
 def daumSearchUrlList():
     pass
+
+
+def getSearchUrlList():
+    pass
+
+
+def getSearchDOM(portal="google", searchString=None):
+    '''
+    구글, 네이버, 다음 포탈에서 특정 문자열을 검색한 결과를 DOM 객체로 반환
+    합니다.
+
+    portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
+    searchString: 검색할 문자열(String)
+    '''
+    googleUrl = "http://www.google.com/search"
+    naverUrl = "https://search.naver.com/search.naver"
+    daumUrl = "https://search.daum.net/search"
+
+    portal = portal.lower()
+
+    if portal in ["google", "g"]:
+        html = getDownload(googleUrl, params={"q": searchString})
+    elif portal in ["naver", "n"]:
+        html = getDownload(naverUrl, params={"query": searchString})
+    elif portal in ["daum", "d"]:
+        html = getDownload(daumUrl, params={"q": searchString})
+    else:
+        html = []
+
+    if html != None:
+        dom = BeautifulSoup(html.text, "lxml")
+    else:
+        dom = []
+
+    return dom
