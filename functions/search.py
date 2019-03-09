@@ -1,5 +1,7 @@
-# search 모듈은 download 모듈을 이용하여 포탈 사이트의 검색결과 중 특정
-# 데이터를 추출하는 함수들을 포함하고 있다.
+'''
+search 모듈은 download 모듈을 이용하여 포탈 사이트의 검색결과 중 특정
+데이터를 추출하는 함수들을 포함하고 있습니다.
+'''
 
 import requests
 from functions.download import getDownload
@@ -7,7 +9,8 @@ from functions.download import postDownload
 from functions.download import putSubmit
 from bs4 import BeautifulSoup
 
-def googleSearchSubject(searchString=None):
+
+def googleSearchTitleList(searchString=None):
     '''
     이 함수는 구글에서 지정한 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -15,10 +18,10 @@ def googleSearchSubject(searchString=None):
     searchString : 검색할 문자열(String)
     '''
     url = "http://www.google.com/search"
-    html = getDownload(url, params={"q":searchString})
+    html = getDownload(url, params={"q": searchString})
 
     dom = BeautifulSoup(html.text, "lxml")
-    tags = dom.find_all("div", {"class":"r"})
+    tags = dom.find_all("div", {"class": "r"})
 
     result = []
 
@@ -27,7 +30,8 @@ def googleSearchSubject(searchString=None):
 
     return result
 
-def naverSearchSubject(searchString=None):
+
+def naverSearchTitleList(searchString=None):
     '''
     이 함수는 네이버에서 지정한 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -40,7 +44,7 @@ def naverSearchSubject(searchString=None):
 
     html = getDownload(url, params={"query": searchString})
     dom = BeautifulSoup(html.text, "lxml")
-    ulTags = dom.find_all("", {"class":"type01"})
+    ulTags = dom.find_all("", {"class": "type01"})
 
     result = []
 
@@ -52,14 +56,35 @@ def naverSearchSubject(searchString=None):
 
     return result
 
-def daumSearchSubject():
+
+def daumSearchTitleList(searchString):
+    '''
+    이 함수는 다음 포탈에서 문자열을 검색 후 검색결과 중 제목 List를 Return
+    합니다.
+
+    searchString: 검색할 문자열(String)
+    '''
+    url = "https://search.daum.net/search"
+
+    html = getDownload(url, params={"q": searchString})
+    dom = BeautifulSoup(html.text, "lxml")
+    divTags = dom.find_all("", {"class": "mg_tit"})
+
+    result = []
+
+    for tag in divTags:
+        result.append(tag.find("a").text.strip())
+
+    return result
+
+
+def googleSearchUrlList():
     pass
 
-def googleSearchUrl():
+
+def naverSearchUrlList():
     pass
 
-def naverSearchUrl():
-    pass
 
-def daumSearchUrl():
+def daumSearchUrlList():
     pass
