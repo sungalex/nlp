@@ -48,3 +48,25 @@
 
 강의 계획 기준으로 목차를 작성하였습니다. 실제 강의 내용을 반영하여 수정 예정입니다.
 (강의 일정 : 2019.3.4 ~ 2019.4.26)
+
+## functions
+
+강의에서 사용한 명령을 함수로 구현해서 재사용할 수 있도록 정리했습니다.
+`functions` 폴더에 모듈 형태로 구현하고,
+jupyter notebook에서 기능을 테스트 했습니다.
+
+1. download.py
+    - getDownload(url, params, headers, retries): requests.get() 호출 후 Response 객체를 return
+    - postDownload(url, data, headers, retries): requests.post() 호출 후 Response 객체를 return
+1. search.py
+    - getGoogleTitle(searchString): google에서 searchString 검색 후 검색결과에서 제목 List 추출
+    - getNaverTitle(searchString): naver에서 searchString 검색 후 검색결과에서 제목 List 추출
+    - getDaumTitle(searchString): daum에서 searchString 검색 후 검색결과에서 제목 List 추출
+    - getPortalTitle(portal, searchString): 지정한 portal에서 searchString 검색 후 제목 list 추출
+    - getGoogleTitleWithUrl(searchString): getGoogleTitle()에 url을 포함하여 return
+    - getNaverTitleWithUrl(searchString): getNaverTitle()에 url을 포함하여 return
+    - getDaumTitleWithUrl(searchString): getDaumTitle()에 url을 포함하여 return
+    - getPortalTitleWithUrl(portal, searchString): getPortalTitle()에 url을 포함하여 return
+    - getPortalToDOM(searchString): google, naver, daum에서 searchString 검색후 DOM 객체 tuple을 return
+1. download_module_test.ipynb : download.py에 정의한 함수 테스트
+1. portal_title_and_url_retrieve_test.ipynb : search.py에 정의한 함수 테스트
