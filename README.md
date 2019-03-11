@@ -9,7 +9,7 @@
 1. git Advanced 특강 ([자료1](./documents/03\.오픈소스개발방식_QA통합_git_advanced.pdf)) ([자료2](./documents/03\.Git-training-v3.pdf))
 1. Cookie / Session ([자료](./documents/04\.20190307(인공지능%20고급반)%20-%20cookie_session.html)) (Code는 [2강 Code](Code01-HTTP.ipynb)의 끝부분 참조)
 1. 웹 크롤링 - DOM ([자료1](./documents/05\.웹%20크롤링%20-%20DOM.pdf)) ([자료2](./documents/05.20190308(인공지능%20고급반).html)) ([Code](Code02-DOM.ipynb))
-1. 웹 크롤링 - Selector ([자료](./documents/06.Crawling.pdf))
+1. 웹 크롤링 - Selector ([자료](./documents/06.Crawling.pdf)) ([코드](Code03-CSS_Selector.ipynb))
 1. 웹 스크래핑 - 정적 콘텐츠 ([자료](./documents/07.Scraping.pdf))
 1. 웹 스크래핑 - 동적 콘텐츠 ([자료](./documents/08.DHTML.pdf))
 1. 토큰화 - 문단, 문장, 어절, 정규식, Ngram
@@ -62,11 +62,14 @@ jupyter notebook에서 기능을 테스트 했습니다.
     - getGoogleTitle(searchString): google에서 searchString 검색 후 검색결과에서 제목 List 추출
     - getNaverTitle(searchString): naver에서 searchString 검색 후 검색결과에서 제목 List 추출
     - getDaumTitle(searchString): daum에서 searchString 검색 후 검색결과에서 제목 List 추출
+    - getNateTitle(searchString): nate에서 searchString 검색 후 검색결과에서 제목 List 추출
     - getPortalTitle(portal, searchString): 지정한 portal에서 searchString 검색 후 제목 list 추출
     - getGoogleTitleWithUrl(searchString): getGoogleTitle()에 url을 포함하여 return
     - getNaverTitleWithUrl(searchString): getNaverTitle()에 url을 포함하여 return
     - getDaumTitleWithUrl(searchString): getDaumTitle()에 url을 포함하여 return
+    - getNateTitleWithUrl(searchString): getNateTitle()에 url을 포함하여 return
     - getPortalTitleWithUrl(portal, searchString): getPortalTitle()에 url을 포함하여 return
     - getPortalToDOM(searchString): google, naver, daum에서 searchString 검색후 DOM 객체 tuple을 return
+    - getPortalSearchUrl() : 4대 포탈의 검색 URL을 튜플로 Return
 1. download_module_test.ipynb : download.py에 정의한 함수 테스트
 1. portal_title_and_url_retrieve_test.ipynb : search.py에 정의한 함수 테스트
