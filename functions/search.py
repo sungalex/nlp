@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 googleUrl = "http://www.google.com/search"
 naverUrl = "https://search.naver.com/search.naver"
 daumUrl = "https://search.daum.net/search"
+nateUrl = "https://search.daum.net/nate"
 
 
 def getGoogleTitle(searchString=None):
@@ -99,7 +100,32 @@ def getDaumTitle(searchString=None):
     result = []
 
     for tag in divTags:
-        result.append(tag.find("a").text.strip())
+        a = tag.find("a")
+        if a != None:
+            result.append(a.text.strip())
+    return result
+
+
+def getNateTitle(searchString=None):
+    '''
+    이 함수는 네이트 포탈에서 문자열을 검색 후 검색결과 중 제목 List를 Return
+    합니다. (편의상 블로그 검색 결과만 Return 합니다.)
+
+    네이트는 다음 검색을 이용합니다. 
+    
+    블로그 검색 결과는 id가 "blogColl"인 <div> 태그 하부에 존재 합니다.
+    <a> 태그의 class명 "f_link_b" 내에 제목이 있습니다.
+
+    searchString: 검색할 문자열(String)
+    '''
+    html = getDownload(nateUrl, params={"q": searchString})
+    dom = BeautifulSoup(html.text, "lxml")
+
+    result = []
+
+    blog = dom.find("", {"id":"blogColl"})
+    for tag in blog.find_all("a", {"class":"f_link_b"}):
+        result.append(tag.text)
 
     return result
 
@@ -109,7 +135,7 @@ def getPortalTitle(portal="google", searchString=None):
     지정한 검색 포탈에서 지정한 문자열을 찾은 후 검색결과 중 제목 List를 Return
     합니다.
 
-    portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
+    portal: "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정(default는 "google")
     searchString: 검색할 문자열(String)
     '''
     portal = portal.lower()
@@ -120,9 +146,11 @@ def getPortalTitle(portal="google", searchString=None):
         resp = getNaverTitle(searchString)
     elif portal in ["daum", "d"]:
         resp = getDaumTitle(searchString)
+    elif portal in ["nate", "na"]:
+        resp = getNateTitle(searchString)
     else:
         resp = []
-        print('portal은 "google", "g", "naver", "n", "daum", "d" 중 하나를 지정하세요.')
+        print('portal은 "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정하세요.')
 
     return resp
 
@@ -224,8 +252,34 @@ def getDaumTitleWithUrl(searchString=None):
     result = []
 
     for tag in divTags:
-        title = tag.find("a").text.strip()
-        url = tag.find("a").get("href")
+        a = tag.find("a")
+        if a != None:
+            title = a.text.strip()
+            url = a.get("href")
+            result.append([title, url])
+
+    return result
+
+
+def getNateTitleWithUrl(searchString=None):
+    '''
+    이 함수는 네이트 포탈에서 문자열을 검색 후 검색결과 중 제목과 URL List를 Return
+    합니다.
+    (편의상 블로그 검색 결과만 Return 합니다.)
+
+    URL은 <a> 태그 내에 있는 "href" 속성을 가져오면 됩니다. 
+
+    searchString: 검색할 문자열(String)
+    '''
+    html = getDownload(nateUrl, params={"q": searchString})
+    dom = BeautifulSoup(html.text, "lxml")
+
+    result = []
+
+    blog = dom.find("", {"id":"blogColl"})
+    for tag in blog.find_all("a", {"class":"f_link_b"}):
+        title = tag.text.strip()
+        url = tag["href"]
         result.append([title, url])
 
     return result
@@ -247,9 +301,11 @@ def getPortalTitleWithUrl(portal="google", searchString=None):
         resp = getNaverTitleWithUrl(searchString)
     elif portal in ["daum", "d"]:
         resp = getDaumTitleWithUrl(searchString)
+    elif portal in ["nate", "na"]:
+        resp = getNateTitleWithUrl(searchString)
     else:
         resp = []
-        print('portal은 "google", "g", "naver", "n", "daum", "d" 중 하나를 지정하세요.')
+        print('portal은 "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정하세요.')
 
     return resp
 
@@ -265,9 +321,15 @@ def getPortalToDOM(searchString=None):
     googleHtml = getDownload(googleUrl, params={"q": searchString})
     naverHtml = getDownload(naverUrl, params={"query": searchString})
     daumHtml = getDownload(daumUrl, params={"q": searchString})
+    nateHtml = getDownload(nateUrl, params={"q": searchString})
 
     googleDom = BeautifulSoup(googleHtml.text, "lxml")
     naverDom = BeautifulSoup(naverHtml.text, "lxml")
     daumDom = BeautifulSoup(daumHtml.text, "lxml")
+    nateDom = BeautifulSoup(nateHtml.text, "lxml")
 
-    return (googleDom, naverDom, daumDom)
+    return (googleDom, naverDom, daumDom, nateDom)
+
+
+def getPortalSearchUrl():
+    return (googleUrl, naverUrl, daumUrl, nateUrl)
