@@ -224,10 +224,35 @@ class Ppomppu():
     def getContentBodys(self):
         '''
         게시글 별 본문 내용을 반환 합니다.
-        
-        //To-Do
         '''
-        return None
+        # 화면에서 결과를 보려면 아래 print 주석부분 해제
+        contents = []
+        links = self.getLinks()
+
+        for link in links:
+            html = getDownload(link)
+            dom = BeautifulSoup(html.text, 'html.parser')
+
+            board_contents = []
+            # print("자유게시판 링크: ", link, end="\n\n")
+
+            # 중복되는 class명에 대비해서, 태그명과 클래스명을 동시에 명기
+            # (정확히 일치하는 tag만 찾음)
+            for tag in dom.select("table.pic_bg td.han"):
+                if len(tag.text.strip()) == 0:
+                    continue
+                else:
+                    board_contents.append(tag.text.strip())
+
+            if len(board_contents) != 0:
+                # print("자유게시판 본문: \n", board_contents, end="\n\n")
+                contents.append(board_contents)
+            else:
+                contents.append(None)
+
+            # print(">" * 50, end="\n\n")
+
+        return contents
 
     def getComments(self):
         '''
