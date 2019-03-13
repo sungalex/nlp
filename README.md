@@ -73,5 +73,6 @@ jupyter notebook에서 기능을 테스트 했습니다.
     - getPortalSearchUrl() : 4대 포탈의 검색 URL을 튜플로 Return
 1. crawling.py : crawling에 필요한 함수들(TBD)
     - getUrls(link, depth): link 페이지에 포함된 url과 depth를 dictionary 형태로 반환
+1. ppomppu.py : 뽐뿌게시판 scraping에 필요한 함수들
 1. download_module_test.ipynb : download.py에 정의한 함수 테스트
 1. portal_title_and_url_retrieve_test.ipynb : search.py에 정의한 함수 테스트
