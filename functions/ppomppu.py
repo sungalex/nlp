@@ -343,13 +343,35 @@ class PpomppuFreeboard():
     '''
 
     def __init__(self):
+        '''
+        Freeboard 게시판 객체를 생성합니다.
+        '''
         self.url = "http://www.ppomppu.co.kr/zboard/zboard.php"
         self.param = {"id": "freeboard"}
         self.html = getDownload(self.url, self.param)
         self.bs = BeautifulSoup(self.html.text, "html.parser")
+        self.intStrings = self.getIntStrings()
 
     def getIntStrings(self):
-        pass
+        '''
+        "td.eng.list_vspace" 클래스명으로 나타나는 integer String형 자료
+        3개(3개 열)의 값을 반환 합니다.
+        
+        이 3개의 열을 구분할 만한 ID/Class 정보가 없기 때문에 한꺼번에 추출 후
+        순서에 따하 해당 컬럼 자료로 분류해서 사용 합니다.
+        첫번째 자료는 "번호", 두번째 자료는 "추천", 세번째 자료는 "조회수"를
+        의미 합니다. getNumbers(), getLikeCounts(), getQueryCounts() 함수에서
+        이 값을 사용합니다.
+
+        이 함수는 객체 생성 시 호출됩니다.
+        '''
+        intStrings = []
+
+        for tag in self.bs.select("tr > td.eng.list_vspace"):
+            if not tag.has_attr("title"):
+                intStrings.append(tag.text.strip())
+
+        return intStrings
 
     def getNumbers(self):
         pass
