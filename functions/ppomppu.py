@@ -103,6 +103,8 @@ class Ppomppu():
     def getTitles(self):
         '''
         게시글 별 제목을 반환 합니다.
+
+        //To-Do: 종료 게시글 title 가져오기 수정 필요
         '''
         titles = []
         for tag in self.bs.select("table font.list_title"):
@@ -112,6 +114,8 @@ class Ppomppu():
     def getLinks(self):
         '''
         게시글 별 본문 링크를 반환 합니다.
+
+        //To-Do: 종료 게시글 link 가져오기 수정 필요
         '''
         links = []
         for tag in self.bs.select("table font.list_title"):
@@ -221,46 +225,64 @@ class Ppomppu():
 
         return queryCounts
 
-    def getContentBodys(self):
+    def getContents(self):
         '''
-        게시글 별 본문 내용을 반환 합니다.
+        게시글 별 Content 본문 DOM 형태로 반환 합니다.
         '''
-        # 화면에서 결과를 보려면 아래 print 주석부분 해제
         contents = []
         links = self.getLinks()
 
         for link in links:
             html = getDownload(link)
             dom = BeautifulSoup(html.text, 'html.parser')
-
-            board_contents = []
-            # print("자유게시판 링크: ", link, end="\n\n")
-
-            # 중복되는 class명에 대비해서, 태그명과 클래스명을 동시에 명기
-            # (정확히 일치하는 tag만 찾음)
-            for tag in dom.select("table.pic_bg td.han"):
-                if len(tag.text.strip()) == 0:
-                    continue
-                else:
-                    board_contents.append(tag.text.strip())
-
-            if len(board_contents) != 0:
-                # print("자유게시판 본문: \n", board_contents, end="\n\n")
-                contents.append(board_contents)
-            else:
-                contents.append(None)
-
-            # print(">" * 50, end="\n\n")
+            contents.append(dom)
 
         return contents
+
+    def getContentBodys(self):
+        '''
+        게시글 별 본문 내용을 반환 합니다.
+        '''
+        contentBodys = []
+        contents = self.getContents()
+
+        for dom in contents:
+            # 중복되는 class명에 대비해서, 태그명과 클래스명을 동시에 명기
+            # (정확히 일치하는 tag만 찾음)
+            content = dom.select_one("table.pic_bg td.han")
+
+            if content is not None:
+                if len(content.text.strip()) == 0:
+                    contentBodys.append(None)
+                else:
+                    contentBodys.append(content.text.strip())
+            else:
+                contentBodys.append(None)
+
+
+        return contentBodys
 
     def getComments(self):
         '''
         게시글 별 Comments를 반환 합니다.
-
-        //To-Do
         '''
-        return None
+        comments = []
+        contents = self.getContents()
+
+        for dom in contents:
+            if not dom.select("table.info_bg div.han"):
+                replys = dom.select("table.info_bg div.han")
+                comment = []
+
+                for reply in replys:
+                    if len(reply.text.strip()) != 0:
+                        comment.append(reply.text.strip())
+                    else:
+                        comment.append(None)
+
+                comments.append(comment)
+
+        return comments
 
     def getPpomppuBbs(self):
         '''
