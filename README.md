@@ -11,8 +11,8 @@
 1. 웹 크롤링 - DOM ([자료1](./documents/05\.웹%20크롤링%20-%20DOM.pdf)) ([자료2](./documents/05.20190308(인공지능%20고급반).html)) ([Code](Code02-DOM.ipynb))
 1. 웹 크롤링 - Selector ([자료1](./documents/06.Crawling.pdf)) ([자료2](./documents/06.20190311(인공지능%20고급반).html)) ([Code](Code03-CSS_Selector_crawling.ipynb))
 1. 웹 스크래핑 - 정적 콘텐츠 ([자료1](./documents/07.Scraping.pdf)) ([자료2](./documents/07.20190312(인공지능%20고급반).html)) ([Code](Code04-scraping.ipynb))
-1. 웹 스크래핑 - 동적 콘텐츠 ([자료1](./documents/08.DHTML.pdf)) ([자료2](i./documents/08.20190312(인공지능%20고급반).html)) ([Code](Code05-scraping-DHTML.ipynb))
-1. 프로젝트1(네이버 뉴스 기사 scraping) ([Code](Code06-project1.ipynb))
+1. 웹 스크래핑 - 동적 콘텐츠 ([자료1](./documents/08.DHTML.pdf)) ([자료2](i./documents/08.20190313(인공지능%20고급반).html)) ([Code](Code05-scraping-DHTML.ipynb))
+1. 프로젝트1(네이버 뉴스 기사 scraping) ([자료](./documents/09.20190314(인공지능%20고급반).html)) ([Code](Code06-project1.ipynb))
 1. 토큰화 - 문단, 문장, 어절, 정규식, Ngram
 1. 불용어 - 구두점, Stopwords
 1. 형태소 분석 - POS Taggers
