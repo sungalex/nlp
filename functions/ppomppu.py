@@ -9,6 +9,7 @@ from urllib.parse import urljoin
 from datetime import datetime
 import os
 import sys
+import numpy as np
 
 
 class Ppomppu():
@@ -72,7 +73,6 @@ class Ppomppu():
     def getCategorys(self):
         '''
         게시글 별 분류 카테고리를 반환 합니다.
-
         '''
         categorys = []
 
@@ -87,39 +87,34 @@ class Ppomppu():
         '''
         writers = []
 
-        for tag in self.bs.select("div.list_name"):
-            if not tag.find_parent().find_parent()["class"][0] == "list_notice":
-                writer = tag.find("a").text.strip()
-                if len(writer) == 0:
-                    if tag.find("img").has_attr("alt"):
-                        writers.append(tag.find("img")["alt"])
-                    else:
-                        writers.append(None)
-                else:
-                    writers.append(writer)
+        for tag in self.bs.select("td.list_vspace .list_name > a"):
+            if len(tag.text.strip()) == 0:
+                writers.append(tag.find("img")["alt"])
+            else:
+                writers.append(tag.text.strip())
 
         return writers
 
     def getTitles(self):
         '''
         게시글 별 제목을 반환 합니다.
-
-        //To-Do: 종료 게시글 title 가져오기 수정 필요
         '''
         titles = []
-        for tag in self.bs.select("table font.list_title"):
+
+        for tag in self.bs.select("td.list_vspace a > font"):
             titles.append(tag.text.strip())
+
         return titles
 
     def getLinks(self):
         '''
         게시글 별 본문 링크를 반환 합니다.
-
-        //To-Do: 종료 게시글 link 가져오기 수정 필요
         '''
         links = []
-        for tag in self.bs.select("table font.list_title"):
+
+        for tag in self.bs.select("td.list_vspace a > font"):
             links.append(urljoin(self.url, tag.find_parent()["href"]))
+
         return links
 
     def getImageLinks(self):
@@ -172,13 +167,11 @@ class Ppomppu():
         '''
         replyCounts = []
 
-        for tag in self.bs.select("table font.list_title"):
-            parent = tag.find_parent()
-            if not parent.find_next_sibling():
+        for tag in self.bs.select("td.list_vspace td > span"):
+            if len(tag.text.strip()) == 0:
                 replyCounts.append(0)
             else:
-                replyCount = parent.find_next_sibling().span.text.strip()
-                replyCounts.append(int(replyCount))
+                replyCounts.append(int(tag.text.strip()))
 
         return replyCounts
 
@@ -188,9 +181,13 @@ class Ppomppu():
         '''
         writeDates = []
 
-        for tag in self.bs.select("td.eng.list_vspace"):
-            if tag.has_attr("title"):
-                writeDates.append(tag["title"])
+        for tag in self.bs.select("td.eng.list_vspace > .eng.list_vspace"):
+            if tag.find_parent().has_attr("title"):
+                writeDates.append(tag.find_parent()["title"])
+            else:
+                 writeDates.append(None)
+
+        del writeDates[0]    # 0번째 원소(공지 글 등록일)는 제외해야 함
 
         return writeDates
 
@@ -242,76 +239,97 @@ class Ppomppu():
     def getContentBodys(self):
         '''
         게시글 별 본문 내용을 반환 합니다.
+        
+        본문이 2차원 배열 형태로 저장되어 있으며, 본문 하나가 1차원 배열로(<p> 태그의 단락을 하나의 원소로) 저장되어 있습니다.
         '''
+
         contentBodys = []
         contents = self.getContents()
 
         for dom in contents:
-            # 중복되는 class명에 대비해서, 태그명과 클래스명을 동시에 명기
-            # (정확히 일치하는 tag만 찾음)
-            content = dom.select_one("table.pic_bg td.han")
+            body = []
+            for p in dom.select("table.pic_bg td p"):
+                if len(p.text.strip()) != 0:
+                    body.append(p.text.strip())
 
-            if content is not None:
-                if len(content.text.strip()) == 0:
-                    contentBodys.append(None)
-                else:
-                    contentBodys.append(content.text.strip())
-            else:
-                contentBodys.append(None)
-
+            contentBodys.append(body)
 
         return contentBodys
 
     def getComments(self):
         '''
         게시글 별 Comments를 반환 합니다.
+
+        # [댓글 구조]
+        # div.comment_wrapper : 맨 상위 레벨 댓글들을 감싸고 있는 wrapper
+        # div.comment_line : 해당 레벨의 실제 댓글이 포함된 태그 (댓글의 레벨에 상관 없이 태크.클래스명이 동일함)
+        # 댓글의 서브 댓글은 해당 댓글을 나타내는 div.comment_line의 다음 다음 sibling div에 있음
+        # 서브 댓글이 있는 댓글은 div.comment_line의 siblings에 div가 있음
+        #
+        # 댓글 구조
+        # div.comment_wrapper                   --> 맨 상위 레벨 댓글들을 감싸고 있는 wrapper
+        #    - div.comment_div0
+        #        - div.comment_line             --> 해당 레벨의 댓글이 포함되어 있음 (맨 상위 레벨 댓글)
+        #            ---- div.han               --> 실제 댓글 본문
+        #        - div
+        #        - div                          --> 서브 댓글이 없는 경우 Null (태그가 없거나 내용이 없음)
+        #            - div.comment_line         --> 해당 레벨의 댓글이 포함되어 있음
+        #                ---- div.han           --> 실제 댓글 본문
+        #            - div
+        #            - div                      --> 서브 댓글이 없는 경우 Null (태그가 없거나 내용이 없음)
+        #                - div.comment_line     --> 해당 레벨의 댓글이 포함되어 있음
+        #                    ---- div.han       --> 실제 댓글 본문
+        #                - div
+        #                - div
+        #
+        # 실제 댓글 본문은 div.comment_line 아래 div.han에 있음
+        # 댓글 본문을 가져오려면 : dom.select("div.comment_wrapper div.han"), dom.select("div#newbbs div.han"),
+        #                    dom.select("div.comment_line div.han"), dom.select("div.han") 등 선택적으로 사용 가능
+        # 전체 댓글을 계층적으로 읽어오려면 : //To-To
         '''
+
         comments = []
         contents = self.getContents()
 
         for dom in contents:
-            if not dom.select("table.info_bg div.han"):
-                replys = dom.select("table.info_bg div.han")
+            if len(dom.select("div.comment_line div.han")) != 0:
                 comment = []
 
-                for reply in replys:
-                    if len(reply.text.strip()) != 0:
-                        comment.append(reply.text.strip())
-                    else:
-                        comment.append(None)
+                for comment_ in dom.select("div.comment_line div.han"):
+                    if len(comment_.text.strip()) != 0:
+                        comment.append(comment_.text.strip())
 
-                comments.append(comment)
-
+            comments.append(comment)
+        
         return comments
 
     def getPpomppuBbs(self):
         '''
         뽐뿌게시판 전체 column을 리스트로 반환 합니다.
         
-        번호, 분류, 글쓴이, 제목, 본문 링크, 이미지 링크, 이미지
-        파일, 댓글 수, 작성일시, 추천 수, 조회 수, 게시글 본문, 댓글을
+        번호, 분류, 글쓴이, 제목, 본문 링크, 이미지 링크, 이미지 저장 위치, 
+        댓글 수, 작성일시, 추천 수, 조회 수를
         List의 List로 반환 합니다.
         '''
-        numbers = self.getNumbers()
-        categorys = self.getCategorys()
-        writers = self.getWriters()
-        titles = self.getTitles()
-        links = self.getLinks()
-        imageLinks = self.getImageLinks()
-        images = self.getImages()
-        replyCounts = self.getReplyCounts()
-        writeDates = self.getWriteDates()
-        likes = self.getLikeCounts()
-        queryCounts = self.getQueryCounts()
-        contents = self.getContentBodys()
-        comments = self.getComments()
+        numbers = np.array(self.getNumbers())
+        categorys = np.array(self.getCategorys())
+        writers = np.array(self.getWriters())
+        titles = np.array(self.getTitles())
+        links = np.array(self.getLinks())
+        imageLinks = np.array(self.getImageLinks())
+        images = np.array(self.getImages())
+        replyCounts = np.array(self.getReplyCounts())
+        writeDates = np.array(self.getWriteDates())
+        likes = np.array(self.getLikeCounts())
+        queryCounts = np.array(self.getQueryCounts())
+        # contents = np.array(self.getContentBodys())
+        # comments = np.array(self.getComments())
 
-        ppList = [
+        ppomppu = np.array([
             numbers, categorys, writers, titles, links, imageLinks, images,
-            replyCounts, writeDates, likes, queryCounts, contents, comments
-        ]
+            replyCounts, writeDates, likes, queryCounts])
 
-        return ppList
+        return np.vstack(ppomppu.T)
 
 
 class PpomppuFreeboard():
