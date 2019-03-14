@@ -18,9 +18,9 @@ class Ppomppu():
     함수들을 포함하고 있습니다.
     '''
 
-    def __init__(self, category=None):
+    def __init__(self, category=None, param={"id": "ppomppu"}):
         '''
-        Ppomppu 객체를 생성합니다.
+        Ppomppu 게시판 객체를 생성합니다.
         
         객체 생성 시 category 값을 전달하면, 해당 category 게시글만 List 됩니다.
         category를 지정하지 않으면 전체 게시글이 List 됩니다.
@@ -30,9 +30,13 @@ class Ppomppu():
             4~6:컴퓨터,디니털,먹거리
             8~13:서적,가전/가구,육아,카메라,의류/잡화,화장품
             15:등산/캠핑
+
+        param 매개변수는 자유게시판 등 다른 게시판에서 뽐뿌게시판의 메서드를 재사용할 수 있도록 하기 위한 기능 입니다.
+        자유게시판의 param 매개변수 값은 {"id": "freeboard"} 입니다.
+
         '''
         self.url = "http://www.ppomppu.co.kr/zboard/zboard.php"
-        self.param = {"id": "ppomppu", "category": category}
+        self.param = param.update({"category": category})
         self.html = getDownload(self.url, self.param)
         self.bs = BeautifulSoup(self.html.text, "html.parser")
         self.intStrings = self.getIntStrings()
@@ -344,6 +348,9 @@ class PpomppuFreeboard():
         self.html = getDownload(self.url, self.param)
         self.bs = BeautifulSoup(self.html.text, "html.parser")
 
+    def getIntStrings(self):
+        pass
+
     def getNumbers(self):
         pass
 
@@ -356,7 +363,7 @@ class PpomppuFreeboard():
     def getTitles(self):
         pass
 
-    def getUrls(self):
+    def getLinks(self):
         pass
 
     def getImageLinks(self):
@@ -377,11 +384,14 @@ class PpomppuFreeboard():
     def getQueryCounts(self):
         pass
 
-    def getReplyContents(self):
+    def getContents(self):
+        pass
+
+    def getContentBodys(self):
         pass
 
     def getComments(self):
         pass
 
-    def getFreeboardList(self):
+    def getFreeboard(self):
         pass
