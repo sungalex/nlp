@@ -346,8 +346,8 @@ class PpomppuFreeboard():
         self.param = {"id": "freeboard"}
         self.html = getDownload(self.url, self.param)
         self.bs = BeautifulSoup(self.html.text, "html.parser")
-        self.intStrings = self.glist_vspace_select()[0]
-        self.writeDates = self.glist_vspace_select()[1]
+        self.intStrings = self.list_vspace_select()[0]
+        self.writeDates = self.list_vspace_select()[1]
 
     def list_vspace_select(self):
         '''
@@ -371,9 +371,9 @@ class PpomppuFreeboard():
                 writeDates.append(list_vspace["title"])
             else:           # 번호(0), 추천 수(1), 조회 수(2)
                 if len(list_vspace.text.split("-")[0].strip()) != 0:
-                    intStrings.append(int(list_vspace.text.split("-")[0].strip()))
+                    intStrings.append(list_vspace.text.split("-")[0].strip())
                 else:
-                    intStrings.append(0)
+                    intStrings.append("0")
 
         del writeDates[0]    # 공지글 작성일 삭제
         del intStrings[0:2]    # 공지글 추천 수, 조회 수 삭제 (공지글 번호는 없음)
@@ -398,11 +398,13 @@ class PpomppuFreeboard():
         '''
         writers = []
 
-        for tag in self.bs.select("td.list_vspace list_vspace > a"):
+        for tag in self.bs.select("td.list_vspace .list_vspace > a"):
             if len(tag.text.strip()) == 0:
                 writers.append(tag.find("img")["alt"])
             else:
                 writers.append(tag.text.strip())
+
+        del writers[0]
 
         return writers
 
@@ -434,11 +436,13 @@ class PpomppuFreeboard():
         '''
         replyCounts = []
 
-        for tag in self.bs.select("td.list_vspace list_comment2"):
-            if len(tag.text.strip()) == 0:
+        for tag in self.bs.select("td.list_vspace > a"):
+            if tag.find_next_sibling("span") is None:
                 replyCounts.append(0)
             else:
-                replyCounts.append(int(tag.text.strip()))
+                replyCounts.append(len(tag.find_next_sibling("span").text.strip()))
+
+        del replyCounts[0]
 
         return replyCounts
 
@@ -501,7 +505,8 @@ class PpomppuFreeboard():
 
         for dom in contents:
             body = []
-            for p in dom.select("table.pic_bg td.board-contents p"):
+            for p in dom.select("table.pic_bg td > p"):
+                #print(p)
                 if len(p.text.strip()) != 0:
                     body.append(p.text.strip())
 
@@ -552,7 +557,7 @@ class PpomppuFreeboard():
                     if len(comment_.text.strip()) != 0:
                         comment.append(comment_.text.strip())
 
-            comments.append(comment)
+                comments.append(comment)
         
         return comments
 
