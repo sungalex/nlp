@@ -13,7 +13,7 @@
 1. 웹 스크래핑 - 정적 콘텐츠 ([자료1](./documents/07.Scraping.pdf)) ([자료2](./documents/07.20190312(인공지능%20고급반).html)) ([Code](Code04-scraping.ipynb))
 1. 웹 스크래핑 - 동적 콘텐츠 ([자료1](./documents/08.DHTML.pdf)) ([자료2](./documents/08.20190313(인공지능%20고급반).html)) ([Code](Code05-scraping-DHTML.ipynb))
 1. 프로젝트1(네이버 뉴스 기사 scraping) ([자료](./documents/09.20190314(인공지능%20고급반).html)) ([Code](Code06-project1.ipynb))
-1. 토큰화 - 문단, 문장, 어절, 정규식, Ngram
+1. 토큰화 - 문단, 문장, 어절, 정규식, Ngram ([Code](Code07-토큰화-문단_문장_어절_정규식_Ngram.ipynb))
 1. 불용어 - 구두점, Stopwords
 1. 형태소 분석 - POS Taggers
 1. 구문 분석 - 구, 연어, 시각화
@@ -60,20 +60,10 @@ jupyter notebook에서 기능을 테스트 했습니다.
     - getDownload(url, params, headers, retries): requests.get() 호출 후 Response 객체를 return
     - postDownload(url, data, headers, retries): requests.post() 호출 후 Response 객체를 return
 1. [search.py](./functions/search.py) : 4대 포탈에서 키워드 검색 후 title과 url을 추출 하는데 도움되는 함수들
-    - getGoogleTitle(searchString): google에서 searchString 검색 후 검색결과에서 제목 List 추출
-    - getNaverTitle(searchString): naver에서 searchString 검색 후 검색결과에서 제목 List 추출
-    - getDaumTitle(searchString): daum에서 searchString 검색 후 검색결과에서 제목 List 추출
-    - getNateTitle(searchString): nate에서 searchString 검색 후 검색결과에서 제목 List 추출
-    - getPortalTitle(portal, searchString): 지정한 portal에서 searchString 검색 후 제목 list 추출
-    - getGoogleTitleWithUrl(searchString): getGoogleTitle()에 url을 포함하여 return
-    - getNaverTitleWithUrl(searchString): getNaverTitle()에 url을 포함하여 return
-    - getDaumTitleWithUrl(searchString): getDaumTitle()에 url을 포함하여 return
-    - getNateTitleWithUrl(searchString): getNateTitle()에 url을 포함하여 return
-    - getPortalTitleWithUrl(portal, searchString): getPortalTitle()에 url을 포함하여 return
-    - getPortalToDOM(searchString): google, naver, daum에서 searchString 검색후 DOM 객체 tuple을 return
-    - getPortalSearchUrl() : 4대 포탈의 검색 URL을 튜플로 Return
 1. [crawling.py](./functions/crawling.py) : crawling에 필요한 함수들(TBD)
     - getUrls(link, depth): link 페이지에 포함된 url과 depth를 dictionary 형태로 반환
 1. [ppomppu.py](./functions/ppomppu.py) : 뽐뿌게시판 scraping에 필요한 함수들
 1. [download_module_test.ipynb](download_module_test.ipynb) : download.py에 정의한 함수 테스트
 1. [portal_title_and_url_retrieve_test.ipynb](download_module_test.ipynb) : search.py에 정의한 함수 테스트
+1. [ppomppu_Poomppu_class_test.ipynb](ppomppu_Poomppu_class_test.ipynb) : ppomppu.py트 정의한 Ppomppu class 테스트
+1. [ppomppu_Freeboard_class_test.ipynb](ppomppu_Freeboard_class_test.ipynb) : ppomppu.py트 정의한 PpomppuFreeboard class 테스트
