@@ -63,7 +63,7 @@ def getDownload(url, params=None, headers=header, retries=base_retries):
     headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
     retries: 서버 에러 시 접속 재시도 횟수(integer)
     '''
-    print("Deprecated: get_download() 함수로 변경되었습니다.")
+    print("Deprecated: getDownload()는 get_download()로 변경되었습니다.")
 
     return get_download(url, params, headers, retries)
 
@@ -122,6 +122,6 @@ def postDownload(url,
     headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
     retries: 서버 에러 시 접속 재시도 횟수(integer)
     '''
-    print("Deprecated: post_download() 함수로 변경되었습니다.")
+    print("Deprecated: postDownload()는 post_download()로 변경되었습니다.")
 
     return post_download(url, data, cookie, headers, retries)
