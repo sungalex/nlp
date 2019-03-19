@@ -4,16 +4,16 @@ search 모듈은 download 모듈을 이용하여 포탈 사이트의 검색결�
 '''
 
 import requests
-from functions.download import getDownload
+from functions.download import get_download
 from bs4 import BeautifulSoup
 
-googleUrl = "http://www.google.com/search"
-naverUrl = "https://search.naver.com/search.naver"
-daumUrl = "https://search.daum.net/search"
-nateUrl = "https://search.daum.net/nate"
+google_url = "http://www.google.com/search"
+naver_url = "https://search.naver.com/search.naver"
+daum_url = "https://search.daum.net/search"
+nate_url = "https://search.daum.net/nate"
 
 
-def getGoogleTitle(searchString=None):
+def get_google_title(search_string=None):
     '''
     이 함수는 구글에서 지정한 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -24,9 +24,9 @@ def getGoogleTitle(searchString=None):
     때문에 제목 만 가져오기 위해서는 <a> 태그 내에 있는 <h3> 태그의 text 만을
     가져오면 됩니다.
 
-    searchString : 검색할 문자열(String)
+    search_string : 검색할 문자열(String)
     '''
-    html = getDownload(googleUrl, params={"q": searchString})
+    html = get_download(google_url, params={"q": search_string})
 
     dom = BeautifulSoup(html.text, "lxml")
     tags = dom.find_all("div", {"class": "r"})
@@ -39,7 +39,7 @@ def getGoogleTitle(searchString=None):
     return result
 
 
-def getNaverTitle(searchString=None):
+def get_naver_title(search_string=None):
     '''
     이 함수는 네이버에서 지정한 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -56,11 +56,11 @@ def getNaverTitle(searchString=None):
     태그의 text를 찾으면 됩니다.(<a> 태그를 바로 찾으면 불필요한 내용이
     포함됩니다.)
 
-    searchString : 검색할 문자열(String)
+    search_string : 검색할 문자열(String)
 
     return 값은 섹션별로 제목 리스트를 포함하고 있는 List(2차원 배열) 입니다.
     '''
-    html = getDownload(naverUrl, params={"query": searchString})
+    html = get_download(naver_url, params={"query": search_string})
     dom = BeautifulSoup(html.text, "lxml")
     ulTags = dom.find_all("", {"class": "type01"})
 
@@ -75,7 +75,7 @@ def getNaverTitle(searchString=None):
     return result
 
 
-def getDaumTitle(searchString=None):
+def get_daum_title(search_string=None):
     '''
     이 함수는 다음 포탈에서 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다.
@@ -91,9 +91,9 @@ def getDaumTitle(searchString=None):
     "mg_tit" class명을 이용해서 블로그, 웹문서, 뉴스, 카페글에서 제목을
     추출합니다.
 
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
-    html = getDownload(daumUrl, params={"q": searchString})
+    html = get_download(daum_url, params={"q": search_string})
     dom = BeautifulSoup(html.text, "lxml")
     divTags = dom.find_all("", {"class": "mg_tit"})
 
@@ -106,7 +106,7 @@ def getDaumTitle(searchString=None):
     return result
 
 
-def getNateTitle(searchString=None):
+def get_nate_title(search_string=None):
     '''
     이 함수는 네이트 포탈에서 문자열을 검색 후 검색결과 중 제목 List를 Return
     합니다. (편의상 블로그 검색 결과만 Return 합니다.)
@@ -116,9 +116,9 @@ def getNateTitle(searchString=None):
     블로그 검색 결과는 id가 "blogColl"인 <div> 태그 하부에 존재 합니다.
     <a> 태그의 class명 "f_link_b" 내에 제목이 있습니다.
 
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
-    html = getDownload(nateUrl, params={"q": searchString})
+    html = get_download(nate_url, params={"q": search_string})
     dom = BeautifulSoup(html.text, "lxml")
 
     result = []
@@ -130,24 +130,24 @@ def getNateTitle(searchString=None):
     return result
 
 
-def getPortalTitle(portal="google", searchString=None):
+def get_portal_title(portal="google", search_string=None):
     '''
     지정한 검색 포탈에서 지정한 문자열을 찾은 후 검색결과 중 제목 List를 Return
     합니다.
 
     portal: "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정(default는 "google")
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
     portal = portal.lower()
 
     if portal in ["google", "g"]:
-        resp = getGoogleTitle(searchString)
+        resp = get_google_title(search_string)
     elif portal in ["naver", "n"]:
-        resp = getNaverTitle(searchString)
+        resp = get_naver_title(search_string)
     elif portal in ["daum", "d"]:
-        resp = getDaumTitle(searchString)
+        resp = get_daum_title(search_string)
     elif portal in ["nate", "na"]:
-        resp = getNateTitle(searchString)
+        resp = get_nate_title(search_string)
     else:
         resp = []
         print('portal은 "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정하세요.')
@@ -155,7 +155,7 @@ def getPortalTitle(portal="google", searchString=None):
     return resp
 
 
-def getGoogleTitleWithUrl(searchString=None):
+def get_google_title_with_url(search_string=None):
     '''
     이 함수는 구글에서 지정한 문자열을 검색 후 검색결과 중 제목과 URL List를 Return
     합니다.
@@ -168,9 +168,9 @@ def getGoogleTitleWithUrl(searchString=None):
 
     URL은 <a> 태그 내에 있는 "href" 속성을 가져오면 됩니다. 
 
-    searchString : 검색할 문자열(String)
+    search_string : 검색할 문자열(String)
     '''
-    html = getDownload(googleUrl, params={"q": searchString})
+    html = get_download(google_url, params={"q": search_string})
 
     dom = BeautifulSoup(html.text, "lxml")
     tags = dom.find_all("div", {"class": "r"})
@@ -185,7 +185,7 @@ def getGoogleTitleWithUrl(searchString=None):
     return result
 
 
-def getNaverTitleWithUrl(searchString=None):
+def get_naver_title_with_url(search_string=None):
     '''
     이 함수는 네이버에서 지정한 문자열을 검색 후 검색결과 중 제목과 URL List를 Return
     합니다.
@@ -204,11 +204,11 @@ def getNaverTitleWithUrl(searchString=None):
 
     URL은 <a> 태그 내에 있는 "href" 속성을 가져오면 됩니다. 
 
-    searchString : 검색할 문자열(String)
+    search_string : 검색할 문자열(String)
 
     return 값은 섹션별로 제목 리스트를 포함하고 있는 List(2차원 배열) 입니다.
     '''
-    html = getDownload(naverUrl, params={"query": searchString})
+    html = get_download(naver_url, params={"query": search_string})
     dom = BeautifulSoup(html.text, "lxml")
     ulTags = dom.find_all("", {"class": "type01"})
 
@@ -225,7 +225,7 @@ def getNaverTitleWithUrl(searchString=None):
     return result
 
 
-def getDaumTitleWithUrl(searchString=None):
+def get_daum_title_with_url(search_string=None):
     '''
     이 함수는 다음 포탈에서 문자열을 검색 후 검색결과 중 제목과 URL List를 Return
     합니다.
@@ -243,9 +243,9 @@ def getDaumTitleWithUrl(searchString=None):
 
     URL은 <a> 태그 내에 있는 "href" 속성을 가져오면 됩니다. 
 
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
-    html = getDownload(daumUrl, params={"q": searchString})
+    html = get_download(daum_url, params={"q": search_string})
     dom = BeautifulSoup(html.text, "lxml")
     divTags = dom.find_all("", {"class": "mg_tit"})
 
@@ -261,7 +261,7 @@ def getDaumTitleWithUrl(searchString=None):
     return result
 
 
-def getNateTitleWithUrl(searchString=None):
+def get_nate_title_with_url(search_string=None):
     '''
     이 함수는 네이트 포탈에서 문자열을 검색 후 검색결과 중 제목과 URL List를 Return
     합니다.
@@ -269,9 +269,9 @@ def getNateTitleWithUrl(searchString=None):
 
     URL은 <a> 태그 내에 있는 "href" 속성을 가져오면 됩니다. 
 
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
-    html = getDownload(nateUrl, params={"q": searchString})
+    html = get_download(nate_url, params={"q": search_string})
     dom = BeautifulSoup(html.text, "lxml")
 
     result = []
@@ -285,24 +285,24 @@ def getNateTitleWithUrl(searchString=None):
     return result
 
 
-def getPortalTitleWithUrl(portal="google", searchString=None):
+def get_portal_title_with_url(portal="google", search_string=None):
     '''
     지정한 검색 포탈에서 지정한 문자열을 찾은 후 검색결과 중 제목과 URL List를 Return
     합니다.
 
     portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
     portal = portal.lower()
 
     if portal in ["google", "g"]:
-        resp = getGoogleTitleWithUrl(searchString)
+        resp = get_google_title_with_url(search_string)
     elif portal in ["naver", "n"]:
-        resp = getNaverTitleWithUrl(searchString)
+        resp = get_naver_title_with_url(search_string)
     elif portal in ["daum", "d"]:
-        resp = getDaumTitleWithUrl(searchString)
+        resp = get_daum_title_with_url(search_string)
     elif portal in ["nate", "na"]:
-        resp = getNateTitleWithUrl(searchString)
+        resp = get_nate_title_with_url(search_string)
     else:
         resp = []
         print('portal은 "google", "g", "naver", "n", "daum", "d", "nate", "na" 중 하나를 지정하세요.')
@@ -310,26 +310,99 @@ def getPortalTitleWithUrl(portal="google", searchString=None):
     return resp
 
 
-def getPortalToDOM(searchString=None):
+def get_portal_to_dom(search_string=None):
     '''
     구글, 네이버, 다음 포탈에서 특정 문자열을 검색한 결과를 DOM 객체 List로 반환
     합니다.
 
     portal: "google", "g", "naver", "n", "daum", "d" 중 하나를 지정(default는 "google")
-    searchString: 검색할 문자열(String)
+    search_string: 검색할 문자열(String)
     '''
-    googleHtml = getDownload(googleUrl, params={"q": searchString})
-    naverHtml = getDownload(naverUrl, params={"query": searchString})
-    daumHtml = getDownload(daumUrl, params={"q": searchString})
-    nateHtml = getDownload(nateUrl, params={"q": searchString})
+    google_html = get_download(google_url, params={"q": search_string})
+    naver_html = get_download(naver_url, params={"query": search_string})
+    daum_html = get_download(daum_url, params={"q": search_string})
+    nate_html = get_download(nate_url, params={"q": search_string})
 
-    googleDom = BeautifulSoup(googleHtml.text, "lxml")
-    naverDom = BeautifulSoup(naverHtml.text, "lxml")
-    daumDom = BeautifulSoup(daumHtml.text, "lxml")
-    nateDom = BeautifulSoup(nateHtml.text, "lxml")
+    google_dom = BeautifulSoup(google_html.text, "lxml")
+    naver_dom = BeautifulSoup(naver_html.text, "lxml")
+    daum_dom = BeautifulSoup(daum_html.text, "lxml")
+    nate_dom = BeautifulSoup(nate_html.text, "lxml")
 
-    return (googleDom, naverDom, daumDom, nateDom)
+    return (google_dom, naver_dom, daum_dom, nate_dom)
 
+
+def get_portal_search_url():
+    return (google_url, naver_url, daum_url, nate_url)
+
+
+def getGoogleTitle(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title()로 변경 되었습니다.
+    '''
+    return get_google_title(searchString)
+
+def getNaverTitle(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title()로 변경 되었습니다.
+    '''
+    return get_naver_title(searchString)
+
+def getDaumTitle(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title()로 변경 되었습니다.
+    '''
+    return get_daum_title(searchString)
+
+def getNateTitle(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title()로 변경 되었습니다.
+    '''
+    return get_nate_title(searchString)
+
+def getPortalTitle(portal="google", searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title()로 변경 되었습니다.
+    '''
+    return get_portal_title(portal, searchString)
+
+def getGoogleTitleWithUrl(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title_with_url()로 변경 되었습니다.
+    '''
+    return get_google_title_with_url(searchString)
+
+def getNaverTitleWithUrl(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title_with_url()로 변경 되었습니다.
+    '''
+    return get_naver_title_with_url(searchString)
+
+def getDaumTitleWithUrl(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title_with_url()로 변경 되었습니다.
+    '''
+    return get_daum_title_with_url(searchString)
+
+def getNateTitleWithUrl(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title_with_url()로 변경 되었습니다.
+    '''
+    return get_nate_title_with_url(searchString)
+
+def getPortalTitleWithUrl(portal="google", searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title_with_url()로 변경 되었습니다.
+    '''
+    return get_portal_title_with_url(portal, searchString)
+
+def getPortalToDOM(searchString=None):
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_to_dom()로 변경 되었습니다.
+    '''
+    return get_portal_to_dom(searchString)
 
 def getPortalSearchUrl():
-    return (googleUrl, naverUrl, daumUrl, nateUrl)
+    '''
+    Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_search_url()로 변경 되었습니다.
+    '''
+    return get_portal_search_url()
