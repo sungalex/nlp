@@ -7,7 +7,7 @@
 1. 자연어처리 소개 및 분석과정 ([자료](./documents/01\.NLP%20-%20자연어처리%20소개%20및%20분석과정.pdf))
 1. 비정형 데이터 - HTTP, Urllib, Requests ([자료1](./documents/02\.HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pdf)) ([자료2](./documents/02.20190305(인공지능%20고급반).html)) ([Code](lecture02-HTTP.ipynb))
 1. git Advanced 특강 ([자료1](./documents/03\.오픈소스개발방식_QA통합_git_advanced.pdf)) ([자료2](./documents/03\.Git-training-v3.pdf))
-1. Cookie / Session ([자료](./documents/04\.20190307(인공지능%20고급반)%20-%20cookie_session.html)) (Code는 [2강 Code](Code01-HTTP.ipynb)의 끝부분 참조)
+1. Cookie / Session ([자료](./documents/04\.20190307(인공지능%20고급반)%20-%20cookie_session.html)) (Code는 [2강 Code](lecture02-HTTP.ipynb)의 끝부분 참조)
 1. 웹 크롤링 - DOM ([자료1](./documents/05\.웹%20크롤링%20-%20DOM.pdf)) ([자료2](./documents/05.20190308(인공지능%20고급반).html)) ([Code](lecture05-DOM.ipynb))
 1. 웹 크롤링 - Selector ([자료1](./documents/06.Crawling.pdf)) ([자료2](./documents/06.20190311(인공지능%20고급반).html)) ([Code](lecture06-CSS_Selector_crawling.ipynb))
 1. 웹 스크래핑 - 정적 콘텐츠 ([자료1](./documents/07.Scraping.pdf)) ([자료2](./documents/07.20190312(인공지능%20고급반).html)) ([Code](lecture07-scraping.ipynb))
