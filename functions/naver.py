@@ -117,9 +117,9 @@ class NewsScraping():
         self._get_newslists()
         self._make_savedir()
 
-        for section in self._newslists:
+        for idx, section in enumerate(self._newslists):
             # 파일명에 사용할 카테고리 이름 가져오기
-            idx = self._newslists.index(section)
+            # idx = self._newslists.index(section)
             cat_code = self._category_codes[self._category_names[idx]]
 
             # 기사 다운로드 하고 가져오기
