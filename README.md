@@ -15,7 +15,7 @@
 1. 프로젝트1(네이버 뉴스 기사 scraping) ([자료](./documents/09.20190314(인공지능%20고급반).html)) ([Code](Code06-project1.ipynb))
 1. 토큰화 - 문단, 문장, 어절, 정규식 ([자료1](./documents/10.Preprocessing1-토큰화-문장_어절.pdf)) ([자료2](./documents/10.20190315(인공지능%20고급반).html)) ([Code](Code07-preprocessing1_토큰화-문단_문장_어절_정규식.ipynb))
 1. 토큰화 - Ngram, WPM ([자료1](./documents/11.Preprocessing2-Ngram_WPM.pdf)) ([자료2](./documents/11.20190318(인공지능%20고급반).html)) ([Code](Code08-preprocessing2-NLTK_Text-Ngram-WPM-EmpiricalLaw.ipynb))
-1. 불용어 - 구두점, Stopwords ([자료](./documents/12.Normalization-불용어-Punctuation_stopwords.pdf))
+1. 불용어 - 구두점, Stopwords ([자료](./documents/12.Normalization-불용어-Punctuation_stopwords.pdf)) ([Code](Code09-Text_Normalization.ipynb))
 1. 형태소 분석 - POS Taggers
 1. 구문 분석 - 구, 연어, 시각화
 1. 정보검색 - 색인 기법
@@ -64,7 +64,9 @@ jupyter notebook에서 기능을 테스트 했습니다.
 1. [crawling.py](./functions/crawling.py) : crawling에 필요한 함수들(TBD)
     - getUrls(link, depth): link 페이지에 포함된 url과 depth를 dictionary 형태로 반환
 1. [ppomppu.py](./functions/ppomppu.py) : 뽐뿌게시판 scraping에 필요한 함수들
+1. [naver.py](./functions/naver.py) : naver 뉴스 기사 scraping에 필요한 함수들
 1. [download_module_test.ipynb](download_module_test.ipynb) : download.py에 정의한 함수 테스트
 1. [portal_title_and_url_retrieve_test.ipynb](download_module_test.ipynb) : search.py에 정의한 함수 테스트
 1. [ppomppu_Poomppu_class_test.ipynb](ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
 1. [ppomppu_Freeboard_class_test.ipynb](ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
+1. [naver_news_scraping_test.ipynb](naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
