@@ -1,6 +1,9 @@
 '''
 naver.py : Naver 실시간 주요 News Scraping
 
+//To-Do : 테스트 필요
+//To-Do : 기타 수정 사항들 반영 (메모장 참고)
+
 '''
 from functions.download import getDownload
 from bs4 import BeautifulSoup
