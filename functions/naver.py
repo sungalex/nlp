@@ -29,8 +29,18 @@ class NewsScraping():
             self._category_names[2]: "02",
             self._category_names[3]: "03",
             self._category_names[4]: "04",
-            self._category_names[5]: "05",
-        }
+            self._category_names[5]: "05"}
+        self.ranks = {
+            '1': '01',
+            '2': '02',
+            '3': '03',
+            '4': '04',
+            '5': '05',
+            '6': '06',
+            '7': '07',
+            '8': '08',
+            '9': '09',
+            '10': '10'}
         self._path = ""
         self._newslists = []    # 6개 카테고리, 10개 기사, 랭크/제목/링크
         self._filenames = []    # 저장된 파일 리스트
@@ -107,19 +117,6 @@ class NewsScraping():
         self._get_newslists()
         self._make_savedir()
 
-        ranks = {
-            '1': '01',
-            '2': '02',
-            '3': '03',
-            '4': '04',
-            '5': '05',
-            '6': '06',
-            '7': '07',
-            '8': '08',
-            '9': '09',
-            '10': '10'
-        }
-
         for section in self._newslists:
             # 파일명에 사용할 카테고리 이름 가져오기
             idx = self._newslists.index(section)
@@ -141,7 +138,7 @@ class NewsScraping():
                 # 기사 url에 포함된 article ID(aid) 값을 추출해서 file명에 사용
                 aid = re.findall(r"aid=\d+", sec[2])[0].split("=")[1]
                 rank = sec[0]
-                fileName = cat_code + "-" + ranks[rank] + "-" + aid + ".txt"
+                fileName = cat_code + "-" + self.ranks[rank] + "-" + aid + ".txt"
                 fullPath = os.path.join(self._path, fileName)
 
                 with open(fullPath, "w") as f:
@@ -214,23 +211,29 @@ class NewsScraping():
 
         return self._articles
 
-    def get_article(self, section='경제'):
+    def get_article(self, section='경제', n_articles=1):
         '''
         다운로드 한 기사 내용 중 지정한 섹션의 첫번째 기사를 읽어옵니다.
+
+        n_articles를 지정하면, 상위 랭크 기사를 지정한 개수 만큼 읽어옵니다.
+
         section은 {'정치', '경제', '사회', '생활문화', '세계', 'IT과학'} 
         중 하나를 지정합니다.
+
         return: 지정한 섹션의 첫번째 기사 내용을 문자열 형태로 반환 합니다.
         '''
         self._article = ""
+        n_ranks = []
+        for rank in range(1, n_articles + 1):
+            n_ranks.append(self.ranks[str(rank)])
 
         self.get_filenames()
 
         for fileName in self._filenames:
-            code = fileName.split("/")[-1].split("-")[
-                0:2]    # code[0]:섹션코드, [1]:rank
-            if code[0] == self._category_codes[section] and code[1] == "01":
+            code = fileName.split("/")[-1].split("-")[0:2] #[0]:섹션코드, [1]:rank
+            if code[0] == self._category_codes[section] and code[1] in n_ranks:
                 with open(fileName, "r") as f:
-                    self._article = f.read()
+                    self._article += f.read() + "\n"
             else:
                 continue
 
