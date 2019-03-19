@@ -20,7 +20,7 @@ base_retries = 3
 
 
 # get Method 방식으로 웹 컨텐츠를 다운로드 하는 함수
-def getDownload(url, params=None, headers=header, retries=base_retries):
+def get_download(url, params=None, headers=header, retries=base_retries):
     '''
     이 함수는 지정한 url에 get Method 방식으로 params의 Query String을
     전달하고 그 결과(Response)를 Return 합니다.
@@ -28,7 +28,7 @@ def getDownload(url, params=None, headers=header, retries=base_retries):
     url: 다운로드 할 웹 페이지 URL(String)
     params: 웹 페이지에 get Method 방식으로 전달할 Query String(Dictionary)
     headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
-    retries: 서버 에러 시 접속 재시도(getDownload 함수 재호출) 횟수(integer)
+    retries: 서버 에러 시 접속 재시도(get_download 함수 재호출) 횟수(integer)
     '''
     resp = None
 
@@ -38,7 +38,61 @@ def getDownload(url, params=None, headers=header, retries=base_retries):
     except HTTPError as e:
         if 500 <= resp.status_code < 600 and retries > 0:
             print("Retries: {0}".format(base_retries - retries + 1))
-            return getDownload(url, params, headers, retries - 1)
+            return get_download(url, params, headers, retries - 1)
+        else:
+            print("HTTPError:[{}]:{}, {}".format(resp.status_code, resp.reason,
+                                                 resp.headers))
+    except ConnectionError as e:
+        print("ConnectionError:{}".format(e))
+    except RequestException as e:
+        print("UnexpectedError:{}".format(e))
+
+    return resp
+
+
+# get Method 방식으로 웹 컨텐츠를 다운로드 하는 함수
+def getDownload(url, params=None, headers=header, retries=base_retries):
+    '''
+    함수명 변경에 따라 get_download() 함수로 대체 됩니다.
+
+    이 함수는 지정한 url에 get Method 방식으로 params의 Query String을
+    전달하고 그 결과(Response)를 Return 합니다.
+
+    url: 다운로드 할 웹 페이지 URL(String)
+    params: 웹 페이지에 get Method 방식으로 전달할 Query String(Dictionary)
+    headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
+    retries: 서버 에러 시 접속 재시도 횟수(integer)
+    '''
+    print("Deprecated: get_download() 함수로 변경되었습니다.")
+
+    return get_download(url, params, headers, retries)
+
+
+# post Method 방식으로 웹 컨텐츠를 다운로드 하는 함수
+def post_download(url,
+                 data=None,
+                 cookie=None,
+                 headers=header,
+                 retries=base_retries):
+    '''
+    이 함수는 지정한 url에 post Method 방식으로 data의 Submit Dictionary를
+    전달하고 그 결과(Response)를 Return 합니다.
+
+    url: post 메서드를 전달 할 웹 페이지 URL(String)
+    data: 웹 페이지에 post Method 방식으로 전달할 submit data(Dictionary)
+    cookie: 웹 페이지에 전달할 쿠기 정보(String)
+    headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
+    retries: 서버 에러 시 접속 재시도(post_download 함수 재호출) 횟수(integer)
+    '''
+    resp = None
+
+    try:
+        resp = requests.post(url, data=data, cookies=cookie, headers=headers)
+        resp.raise_for_status()
+    except HTTPError as e:
+        if 500 <= resp.status_code < 600 and retries > 0:
+            print("Retries: {0}".format(base_retries - retries + 1))
+            return post_download(url, data, cookie, headers, retries - 1)
         else:
             print("HTTPError:[{}]:{}, {}".format(resp.status_code, resp.reason,
                                                  resp.headers))
@@ -57,6 +111,8 @@ def postDownload(url,
                  headers=header,
                  retries=base_retries):
     '''
+    함수명 변경에 따라 post_download() 함수로 대체 됩니다.
+
     이 함수는 지정한 url에 post Method 방식으로 data의 Submit Dictionary를
     전달하고 그 결과(Response)를 Return 합니다.
 
@@ -64,23 +120,8 @@ def postDownload(url,
     data: 웹 페이지에 post Method 방식으로 전달할 submit data(Dictionary)
     cookie: 웹 페이지에 전달할 쿠기 정보(String)
     headers: HTTP Request header 부분에 포함할 parameters(Dictionary)
-    retries: 서버 에러 시 접속 재시도(getDownload 함수 재호출) 횟수(integer)
+    retries: 서버 에러 시 접속 재시도 횟수(integer)
     '''
-    resp = None
+    print("Deprecated: post_download() 함수로 변경되었습니다.")
 
-    try:
-        resp = requests.post(url, data=data, cookies=cookie, headers=headers)
-        resp.raise_for_status()
-    except HTTPError as e:
-        if 500 <= resp.status_code < 600 and retries > 0:
-            print("Retries: {0}".format(base_retries - retries + 1))
-            return postDownload(url, data, cookie, headers, retries - 1)
-        else:
-            print("HTTPError:[{}]:{}, {}".format(resp.status_code, resp.reason,
-                                                 resp.headers))
-    except ConnectionError as e:
-        print("ConnectionError:{}".format(e))
-    except RequestException as e:
-        print("UnexpectedError:{}".format(e))
-
-    return resp
+    return post_download(url, data, cookie, headers, retries)
