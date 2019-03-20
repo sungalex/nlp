@@ -335,74 +335,99 @@ def get_portal_search_url():
     return (google_url, naver_url, daum_url, nate_url)
 
 
+# Deprecated functions
 def getGoogleTitle(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title()로 변경 되었습니다.")
+
     return get_google_title(searchString)
 
 def getNaverTitle(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title()로 변경 되었습니다.")
+
     return get_naver_title(searchString)
 
 def getDaumTitle(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title()로 변경 되었습니다.")
+
     return get_daum_title(searchString)
 
 def getNateTitle(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title()로 변경 되었습니다.")
+
     return get_nate_title(searchString)
 
 def getPortalTitle(portal="google", searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title()로 변경 되었습니다.")
+
     return get_portal_title(portal, searchString)
 
 def getGoogleTitleWithUrl(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title_with_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_google_title_with_url()로 변경 되었습니다.")
+
     return get_google_title_with_url(searchString)
 
 def getNaverTitleWithUrl(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title_with_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_naver_title_with_url()로 변경 되었습니다.")
+
     return get_naver_title_with_url(searchString)
 
 def getDaumTitleWithUrl(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title_with_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_daum_title_with_url()로 변경 되었습니다.")
+
     return get_daum_title_with_url(searchString)
 
 def getNateTitleWithUrl(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title_with_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_nate_title_with_url()로 변경 되었습니다.")
+
     return get_nate_title_with_url(searchString)
 
 def getPortalTitleWithUrl(portal="google", searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title_with_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_title_with_url()로 변경 되었습니다.")
+
     return get_portal_title_with_url(portal, searchString)
 
 def getPortalToDOM(searchString=None):
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_to_dom()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_to_dom()로 변경 되었습니다.")
+
     return get_portal_to_dom(searchString)
 
 def getPortalSearchUrl():
     '''
     Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_search_url()로 변경 되었습니다.
     '''
+    print("Deprecated: 함수명 규칙 변경에 따라 함수명이 get_portal_search_url()로 변경 되었습니다.")
+    
     return get_portal_search_url()
