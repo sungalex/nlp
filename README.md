@@ -16,8 +16,7 @@
 1. 토큰화 - 문단, 문장, 어절, 정규식 ([자료1](./documents/10.Preprocessing1-토큰화-문장_어절.pdf)) ([자료2](./documents/10.20190315(인공지능%20고급반).html)) ([Code](lecture10-preprocessing1_토큰화-문단_문장_어절_정규식.ipynb))
 1. 토큰화 - Ngram, WPM ([자료1](./documents/11.Preprocessing2-Ngram_WPM.pdf)) ([자료2](./documents/11.20190318(인공지능%20고급반).html)) ([Code](lecture11-preprocessing2-NLTK_Text-Ngram-WPM-EmpiricalLaw.ipynb))
 1. 불용어 - 구두점, Stopwords ([자료1](./documents/12.Normalization-불용어-Punctuation_stopwords.pdf)) ([자료2](./documents/12.20190319(인공지능%20고급반).html)) ([Code](lecture12-Text_Normalization.ipynb))
-1. 형태소 분석 - POS Taggers
-1. 구문 분석 - 구, 연어, 시각화
+1. 형태소분석-POS_Taggers, 구문분석-구/연어/시각화 ([자료](./documents/13.POS-Parse_Tree.pdf)) ([Code](lecture13-형태소분석_POS_Taggers-구문분석_구_연어_시각화.ipynb))
 1. 정보검색 - 색인 기법
 1. 정보검색 - 가중치 기법
 1. 정보검색 - 벡터 공간 모델
