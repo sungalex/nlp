@@ -30,7 +30,7 @@ class NewsScraping():
             self._category_names[3]: "03",
             self._category_names[4]: "04",
             self._category_names[5]: "05"}
-        self.ranks = {
+        self._ranks = {
             '1': '01',
             '2': '02',
             '3': '03',
@@ -139,7 +139,7 @@ class NewsScraping():
                 # 기사 url에 포함된 article ID(aid) 값을 추출해서 file명에 사용
                 aid = re.findall(r"aid=\d+", sec[2])[0].split("=")[1]
                 rank = sec[0]
-                fileName = cat_code + "-" + self.ranks[rank] + "-" + aid + ".txt"
+                fileName = cat_code + "-" + self._ranks[rank] + "-" + aid + ".txt"
                 fullPath = os.path.join(self._path, fileName)
 
                 with open(fullPath, "w") as f:
@@ -227,7 +227,7 @@ class NewsScraping():
         self._article = ""
         n_ranks = []
         for rank in range(1, n_articles + 1):
-            n_ranks.append(self.ranks[str(rank)])
+            n_ranks.append(self._ranks[str(rank)])
 
         self.get_filenames()
 
