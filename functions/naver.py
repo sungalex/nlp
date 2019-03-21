@@ -13,14 +13,14 @@ import pandas as pd
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-from functions.download import getDownload
+from functions.download import get_download
 
 
 class NewsScraping():
 
     def __init__(self):
         self._url = "https://news.naver.com/"
-        self._html = getDownload(self._url)
+        self._html = get_download(self._url)
         self._dom = BeautifulSoup(self._html.text, "html.parser")
         self._category_names = ['정치', '경제', '사회', '생활문화', '세계', 'IT과학']
         self._category_codes = {
@@ -117,6 +117,7 @@ class NewsScraping():
         self._get_newslists()
         self._make_savedir()
 
+        print("뉴스 기사 다운로드 중...")
         for idx, section in enumerate(self._newslists):
             # 파일명에 사용할 카테고리 이름 가져오기
             # idx = self._newslists.index(section)
@@ -125,7 +126,7 @@ class NewsScraping():
             # 기사 다운로드 하고 가져오기
             for sec in section:
                 # sec[0]에 rank, sec[1]에 기사 제목, sec[2]에 기사 링크가 있음
-                html = getDownload(sec[2])
+                html = get_download(sec[2])
                 dom = BeautifulSoup(html.text, "html.parser")
                 contents = dom.select("#articleBodyContents")[0]
 
@@ -149,6 +150,7 @@ class NewsScraping():
         df = pd.DataFrame(np.array(self._newslists).reshape(-1, 3))
         df.to_csv(csvFileName, header=False, index=False)
 
+        print("{0} 폴더에 뉴스 기사 다운로드 완료".format(self._path))
         return self._newslists
 
     def _get_path(self):
