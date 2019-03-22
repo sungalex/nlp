@@ -17,7 +17,7 @@
 1. 토큰화 - Ngram, WPM ([자료1](./documents/11.Preprocessing2-Ngram_WPM.pdf)) ([자료2](./documents/11.20190318(인공지능%20고급반).html)) ([Code](lecture11-NLTK_Text-Ngram-WPM-EmpiricalLaw.ipynb))
 1. 불용어 - 구두점, Stopwords ([자료1](./documents/12.Normalization-불용어-Punctuation_stopwords.pdf)) ([자료2](./documents/12.20190319(인공지능%20고급반).html)) ([Code](lecture12-Text_Normalization.ipynb))
 1. 형태소분석-POS_Taggers, 구문분석-구/연어/시각화 ([자료1](./documents/13.POS-Parse_Tree.pdf)) ([자료2](./documents/13.20190320(인공지능%20고급반).html)) ([Code1](lecture13-형태소분석_POS_Taggers-구문분석_구_연어_시각화.ipynb)) ([Code2](lecture14-1-parser_wordcloud.ipynb))
-1. 정보검색 - 색인 기법 ([자료1](./documents/14.Introduction_to_Information_Retrieval.pdf)) ([자료2](./documents/15-1.Search_Engine_Architecture.pdf)) ([자료3](./documents/15-2.Crawler_and_Text_Analysis.pdf)) ([Code1](lecture14-2-정보검색_색인기법.ipynb):Code2에 포함되어 있음) ([Code2](lecture15-정보검색_색인기법(계속).ipynb))
+1. 정보검색 - 색인 기법 ([자료1](./documents/14.Introduction_to_Information_Retrieval.pdf)) ([자료2](./documents/15-1.Search_Engine_Architecture.pdf)) ([자료3](./documents/15-2.Crawler_and_Text_Analysis.pdf)) ([자료4](./documents/14.20190321(인공지능%20고급반).html)) ([Code1](lecture14-2-정보검색_색인기법.ipynb):Code2에 포함되어 있음) ([Code2](lecture15-정보검색_색인기법(계속).ipynb))
 1. 정보검색 - 가중치 기법
 1. 정보검색 - 벡터 공간 모델
 1. 정보검색 - 유사도 판별, 순위화
