@@ -1,8 +1,12 @@
 '''
 n-gram을 구현 합니다.
 '''
+import re
+from string import punctuation
+
 from nltk.tokenize import word_tokenize
 from konlpy.tag import Kkma
+
 
 def ngramEojeol(sentence, n=2):
     '''
@@ -17,15 +21,29 @@ def ngramEojeol(sentence, n=2):
     sentence: 단어1, 단어2, 단어3, 단어4  -> 4개
     출력(n=2) : 단어1 단어2, 단어2 단어3, 단어3 단어4 -> 3개 = 4개 - n개(2) + 1
     출력(n=3) : 단어1 단어2 단어3, 단어2 단어3 단어4  -> 2개 = 4개 - n개(3) + 1
-
-    //To-Do: 띄어 쓰기 안되어 있는 경우에도, 단어/구두점 등을 구분할 수 있도록 수정 필요!!!
-    //To-Do: 공백/개행문자 등 제거!!!
     '''
+    stopwords = ["이", "있", "하", "것", "들", "그", "되", "수", "이", "보", 
+                "않", "없", "나", "사람", "주", "아니", "등", "같", "우리", 
+                "때", "년", "가", "한", "지", "고", "전"]
+    
+    # 구두점 제거
+    pattern = re.compile(r"[{0}]".format(re.escape(punctuation)))
+    sentence = pattern.sub("", sentence)
+
+    # word_tokenize
     tokens = word_tokenize(sentence)
+
+    # stopwords
+    clean_tokens = []
+    for token in tokens:
+        if token is not stopwords:
+            clean_tokens.append(token)
+    
+    # ngram
     ngram = []
     
-    for i in range(len(tokens) - n + 1):
-        ngram.append(" ".join(tokens[i:i+n]))    # 공백을 추가해줘야 단어 사이가 구분됨
+    for i in range(len(clean_tokens) - n + 1):
+        ngram.append(" ".join(clean_tokens[i:i+n]))    # 공백을 추가해줘야 단어 사이가 구분됨
         
     return ngram
 
@@ -35,7 +53,7 @@ def ngramUmjeol(term, n=2):
     '''
     음절 단위의 n-gram을 구현 합니다.
 
-    음절 : 하나의 종합된 음의 느낌을 주는 말소리의 단위.몇 개의 음소로 이루어지며, 
+    음절 : 하나의 종합된 음의 느낌을 주는 말소리의 단위. 몇 개의 음소로 이루어지며, 
           모음은 단독으로 한 음절이 되기도 한다.
 
     term : string
@@ -46,6 +64,11 @@ def ngramUmjeol(term, n=2):
     출력(n=2) : 음절1 음절2, 음절2 음절3, 음절3 음절4 -> 3개 = 4개 - n개(2) + 1
     출력(n=3) : 음절1 음절2 음절3, 음절2 음절3 음절4  -> 2개 = 4개 - n개(3) + 1
     '''
+    # 구두점 제거
+    pattern = re.compile(r"[{0}]".format(re.escape(punctuation)))
+    term = pattern.sub("", term)
+
+    # ngram
     ngram = []
     
     for i in range(len(term) - n + 1):
