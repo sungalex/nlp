@@ -62,6 +62,8 @@ jupyter notebook에서 기능을 테스트 했습니다.
     - getUrls(link, depth): link 페이지에 포함된 url과 depth를 dictionary 형태로 반환
 1. [ppomppu.py](./functions/ppomppu.py) : 뽐뿌게시판 scraping에 필요한 함수들
 1. [naver.py](./functions/naver.py) : naver 뉴스 기사 scraping에 필요한 함수들
+1. [nlp/ngram.py](./functions/nlp/ngram.py) : N-gram 함수 구현 => ngramEojeol(), ngramUmjeol() 함수
+1. [nlp/wpm.py](./functions/nlp/wpm.py) : WPM 구현 => split_terms(), find_ngram(), merge_ngram() 함수
 1. [download_module_test.ipynb](download_module_test.ipynb) : download.py에 정의한 함수 테스트
 1. [portal_title_and_url_retrieve_test.ipynb](download_module_test.ipynb) : search.py에 정의한 함수 테스트
 1. [ppomppu_Poomppu_class_test.ipynb](ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
