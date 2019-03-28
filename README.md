@@ -22,7 +22,7 @@
 1. 특강 - 자연어 처리 및 의료인공지능 개발 ([자료](./documents/16.특강-자연어_처리_및_의료인공지능_개발.pdf)) ([Code](lecture16-특강-자연어_처리_및_의료인공지능_개발.ipynb))
 1. 정보검색 - 색인 기법(계속) ([자료1](./documents/17.Inverted_Index.pdf)) (([자료2](./documents/17.20190326(인공지능%20고급반).html)) ([Code](lecture17-정보검색_색인기법(계속).ipynb))
 1. 정보검색 - 가중치 기법, 벡터 공간 모델 ([자료1](./documents/18.Boolean_and_Vector_Space_model.pdf)) (([자료2](./documents/18.20190327(인공지능%20고급반).html)) [Code](lecture18-정보검색-벡터공간모델.ipynb))
-1. 정보검색 - 유사도 판별, 순위화 ([Code](lecture19-정보검색-유사도판별-순위화.ipynb))
+1. 정보검색 - 유사도 판별, 순위화 ([자료](./documents/19.20190328(인공지능%20고급반).html)) ([Code](lecture19-정보검색-유사도판별-순위화.ipynb))
 1. 프로젝트 비정형 데이터를 이용한 검색엔진
 1. 특강
 1. 문서분류 - kNN
