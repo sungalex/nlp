@@ -43,9 +43,11 @@ class NewsScraping():
             '10': '10'}
         self._path = ""
         self._newslists = []    # 6개 카테고리, 10개 기사, 랭크/제목/링크
-        self._filenames = []    # 저장된 파일 리스트
-        self._articles = ""    # 다운로드 한 기사 전체 내용(지정한 섹션 기사)
-        self._article = ""    # 다운로드 한 기사 1건
+        self._dirs = []         # 뉴스 기사가 저장된 폴더 리스트
+        self._filenames = []    # 저장된 파일 리스트(전체 폴더 또는 최근 폴더)
+        self._articles = ""     # 다운로드 한 기사 전체 내용(지정한 섹션 기사)
+        self._all_articles = "" # 누적된 다운로드 기사 전체 내용(지정한 섹션 기사)
+        self._article = ""      # 다운로드 한 기사 1건
 
     def _get_categorys(self):
         '''
@@ -153,32 +155,35 @@ class NewsScraping():
         print("{0} 폴더에 뉴스 기사 다운로드 완료".format(self._path))
         return self._newslists
 
-    def _get_path(self):
+    def _get_dirs(self):
         '''
-        가장 최근 날짜의 폴더를 path로 선택 합니다.
+        "naver_news" 폴더 아래의 폴더 리스트를 self._dirs에 저장 합니다.
+        폴더 리스트의 마지막 원소에 가장 최근의 뉴스 폴더가 저장되도록 sort 합니다.
         '''
-        if self._path == "":
-            _dirs = []
-            for entry in os.listdir("naver_news/"):
-                if os.path.isdir(os.path.join("naver_news/", entry)) == True:
-                    _dirs.append(entry)
+        for entry in os.listdir("naver_news/"):
+            if os.path.isdir(os.path.join("naver_news/", entry)) == True:
+                self._dirs.append(os.path.join("naver_news/", entry))
 
-            _dirs.sort()
-            self._path = "naver_news/" + _dirs[-1]
+        self._dirs.sort()
 
         return self
 
-    def get_filenames(self):
+    def get_filenames(self, all_folder=False):
         '''
         가장 최근 저장된 뉴스 기사 폴더 이름을 포함한 파일명 리스트를 반환 합니다.
         '''
         self._filenames = []
 
-        self._get_path()
-        files = os.listdir(self._path)
-
-        for file in files:
-            self._filenames.append(os.path.join(self._path, file))
+        self._get_dirs()
+        if all_folder == False:
+            files = os.listdir(self._dirs[-1])
+            for file in files:
+                self._filenames.append(os.path.join(self._dirs[-1], file))
+        else:
+            for _dir in self._dirs:
+                files = os.listdir(_dir)
+                for file in files:
+                    self._filenames.append(os.path.join(_dir, file))
 
         self._filenames.sort()
 
@@ -240,3 +245,32 @@ class NewsScraping():
                 continue
 
         return self._article
+
+    def get_all_articles(self, section=None):
+        '''
+        누적된 다운로드 기사 내용 전체를 읽어옵니다.
+
+        section을 지정하면 해당 section의 기사 만 읽어오고, 
+        지정하지 않으면 전체 기사 내용을 읽어옵니다.
+        section은 {'정치', '경제', '사회', '생활문화', '세계', 'IT과학'} 중 하나 입니다.
+
+        return: 지정한 섹션의 전체 기사 내용을 문자열 형태로 반환 합니다.
+        '''
+        self._all_articles = ""
+
+        self.get_filenames(all_folder=True)
+
+        if section is None:
+            sections = ['00', '01', '02', '03', '04', '05']
+        else:
+            sections = [self._category_codes[section]]
+
+        for fileName in self._filenames:
+            sec = fileName.split("/")[-1].split("-")[0]
+            if sec in (sections or self._category_names[int(sections)]):
+                with open(fileName, "r") as f:
+                    self._all_articles += f.read() + "\n"
+            else:
+                continue
+
+        return self._all_articles
