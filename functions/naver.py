@@ -168,22 +168,33 @@ class NewsScraping():
 
         return self
 
-    def get_filenames(self, all_folder=False):
+    def get_filenames(self, all_folder=False, section=None):
         '''
         가장 최근 저장된 뉴스 기사 폴더 이름을 포함한 파일명 리스트를 반환 합니다.
         '''
         self._filenames = []
+        filenames = []
+
+        if section is None:
+            sections = ['00', '01', '02', '03', '04', '05']
+        else:
+            sections = [self._category_codes[section]]
 
         self._get_dirs()
         if all_folder == False:
             files = os.listdir(self._dirs[-1])
             for file in files:
-                self._filenames.append(os.path.join(self._dirs[-1], file))
+                filenames.append(os.path.join(self._dirs[-1], file))
         else:
             for _dir in self._dirs:
                 files = os.listdir(_dir)
                 for file in files:
-                    self._filenames.append(os.path.join(_dir, file))
+                    filenames.append(os.path.join(_dir, file))
+        
+        for filename in filenames:
+            sec = filename.split("/")[-1].split("-")[0]
+            if sec in sections:
+                self._filenames.append(filename)
 
         self._filenames.sort()
 
@@ -208,10 +219,10 @@ class NewsScraping():
         else:
             sections = [self._category_codes[section]]
 
-        for fileName in self._filenames:
-            sec = fileName.split("/")[-1].split("-")[0]
+        for filename in self._filenames:
+            sec = filename.split("/")[-1].split("-")[0]
             if sec in sections:
-                with open(fileName, "r") as f:
+                with open(filename, "r") as f:
                     self._articles += f.read() + "\n"
             else:
                 continue
@@ -236,10 +247,10 @@ class NewsScraping():
 
         self.get_filenames()
 
-        for fileName in self._filenames:
-            code = fileName.split("/")[-1].split("-")[0:2] #[0]:섹션코드, [1]:rank
+        for filename in self._filenames:
+            code = filename.split("/")[-1].split("-")[0:2] #[0]:섹션코드, [1]:rank
             if code[0] == self._category_codes[section] and code[1] in n_ranks:
-                with open(fileName, "r") as f:
+                with open(filename, "r") as f:
                     self._article += f.read() + "\n"
             else:
                 continue
@@ -265,10 +276,10 @@ class NewsScraping():
         else:
             sections = [self._category_codes[section]]
 
-        for fileName in self._filenames:
-            sec = fileName.split("/")[-1].split("-")[0]
-            if sec in (sections or self._category_names[int(sections)]):
-                with open(fileName, "r") as f:
+        for filename in self._filenames:
+            sec = filename.split("/")[-1].split("-")[0]
+            if sec in sections:
+                with open(filename, "r") as f:
                     self._all_articles += f.read() + "\n"
             else:
                 continue
