@@ -190,7 +190,7 @@ class NewsScraping():
                 files = os.listdir(_dir)
                 for file in files:
                     filenames.append(os.path.join(_dir, file))
-        
+
         for filename in filenames:
             sec = filename.split("/")[-1].split("-")[0]
             if sec in sections:
