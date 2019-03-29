@@ -23,7 +23,7 @@
 1. 정보검색 - 색인 기법(계속) ([자료1](./documents/17.Inverted_Index.pdf)) (([자료2](./documents/17.20190326(인공지능%20고급반).html)) ([Code](lecture17-정보검색_색인기법(계속).ipynb))
 1. 정보검색 - 가중치 기법, 벡터 공간 모델 ([자료1](./documents/18.Boolean_and_Vector_Space_model.pdf)) (([자료2](./documents/18.20190327(인공지능%20고급반).html)) [Code](lecture18-정보검색-벡터공간모델.ipynb))
 1. 정보검색 - 유사도 판별, 순위화 ([자료](./documents/19.20190328(인공지능%20고급반).html)) ([Code](lecture19-정보검색-유사도판별-순위화.ipynb))
-1. 프로젝트 비정형 데이터를 이용한 검색엔진
+1. 프로젝트 비정형 데이터를 이용한 검색엔진 ([Code](lecture20-프로젝트-Information_Retrieval_System.ipynb))
 1. 특강
 1. 문서분류 - kNN
 1. 프로젝트 뉴스 자동 분류
@@ -64,8 +64,10 @@ jupyter notebook에서 기능을 테스트 했습니다.
 1. [naver.py](./functions/naver.py) : naver 뉴스 기사 scraping에 필요한 함수들
 1. [nlp/ngram.py](./functions/nlp/ngram.py) : N-gram 함수 구현 => ngramEojeol(), ngramUmjeol() 함수
 1. [nlp/wpm.py](./functions/nlp/wpm.py) : WPM 구현 => split_terms(), find_ngram(), merge_ngram() 함수
+1. [info_retrieval.py](./functions/info_retrieval.py) : 정보검색 관련 함수
 1. [download_module_test.ipynb](download_module_test.ipynb) : download.py에 정의한 함수 테스트
 1. [portal_title_and_url_retrieve_test.ipynb](download_module_test.ipynb) : search.py에 정의한 함수 테스트
 1. [ppomppu_Poomppu_class_test.ipynb](ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
 1. [ppomppu_Freeboard_class_test.ipynb](ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
 1. [naver_news_scraping_test.ipynb](naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
+1. [information_retrieval_test.ipynb](information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
