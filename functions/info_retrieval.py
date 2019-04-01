@@ -181,10 +181,12 @@ def clean_collection(collection):
     '''
     collection의 content에 포함된 email, url, 8자 이상의 글자, 숫자(1글자 또는 5자 이상), 
     Non_Word, white space 등을 제거하고 Cleaned collection을 반환 합니다.
+
+    collection은 tuple(document이름, content)들의 리스트 입니다.
     '''
     cleaned_collection = list()
 
-    for document_name, content in collection:
+    for filename, content in collection:
         cleaned_content = get_remove_pattern()["email"].sub(" ", content)
         cleaned_content = get_remove_pattern()["url"].sub(" ", cleaned_content)
         cleaned_content = get_remove_pattern()["maxlength"].sub(" ", cleaned_content)
@@ -193,7 +195,7 @@ def clean_collection(collection):
         cleaned_content = get_remove_pattern()["whitespace"].sub(" ", cleaned_content)
         cleaned_content = get_remove_pattern()["punctuation"].sub(" ", cleaned_content)
 
-        cleaned_collection.append((document_name, cleaned_content))
+        cleaned_collection.append((filename, cleaned_content))
 
     return cleaned_collection
 
