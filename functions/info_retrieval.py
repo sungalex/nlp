@@ -331,7 +331,7 @@ def tdm2twm(tdm, global_document):
     '''
     document_count = len(global_document)
     twm = defaultdict(lambda: defaultdict(float))
-    dvw = defaultdict(float)    # document vector weight
+    dvw = defaultdict(lambda: defaultdict(float))    # document vector weight
 
     for term, tf_list in tdm.items():
         df = len(tf_list)
