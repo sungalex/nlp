@@ -65,9 +65,9 @@ jupyter notebook에서 기능을 테스트 했습니다.
 1. [nlp/ngram.py](./functions/nlp/ngram.py) : N-gram 함수 구현 => ngramEojeol(), ngramUmjeol() 함수
 1. [nlp/wpm.py](./functions/nlp/wpm.py) : WPM 구현 => split_terms(), find_ngram(), merge_ngram() 함수
 1. [info_retrieval.py](./functions/info_retrieval.py) : 정보검색 관련 함수
-1. [download_module_test.ipynb](download_module_test.ipynb) : download.py에 정의한 함수 테스트
-1. [portal_title_and_url_retrieve_test.ipynb](download_module_test.ipynb) : search.py에 정의한 함수 테스트
-1. [ppomppu_Poomppu_class_test.ipynb](ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
-1. [ppomppu_Freeboard_class_test.ipynb](ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
-1. [naver_news_scraping_test.ipynb](naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
-1. [information_retrieval_test.ipynb](information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
+1. [test/download_module_test.ipynb](./test/download_module_test.ipynb) : download.py에 정의한 함수 테스트
+1. [test/portal_title_and_url_retrieve_test.ipynb](./test/download_module_test.ipynb) : search.py에 정의한 함수 테스트
+1. [test/ppomppu_Poomppu_class_test.ipynb](./test/ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
+1. [test/ppomppu_Freeboard_class_test.ipynb](./test/ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
+1. [test/naver_news_scraping_test.ipynb](./test/naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
+1. [test/information_retrieval_test.ipynb](./test/information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
