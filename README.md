@@ -24,7 +24,7 @@
 1. 정보검색 - 가중치 기법, 벡터 공간 모델 ([자료1](./documents/18.Boolean_and_Vector_Space_model.pdf)) (([자료2](./documents/18.20190327(인공지능%20고급반).html)) [Code](lecture18-정보검색-벡터공간모델.ipynb))
 1. 정보검색 - 유사도 판별, 순위화 ([자료](./documents/19.20190328(인공지능%20고급반).html)) ([Code](lecture19-정보검색-유사도판별-순위화.ipynb))
 1. 프로젝트 비정형 데이터를 이용한 검색엔진 ([Code](lecture20-project2-Information_Retrieval_System.ipynb))
-1. 특강 ([Code](lecture21-tensorflow_keras.ipynb))
+1. 특강 - 딥러닝 활용사례 및 실습 (Tensorflow) ([Code](lecture21-tensorflow_keras.ipynb))
 1. 문서분류 - kNN
 1. 프로젝트 뉴스 자동 분류
 1. 문서분류 - 나이브 베이즈
