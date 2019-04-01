@@ -394,3 +394,128 @@ def evaluate_idf(global_lexicon, global_posting, global_document):
             posting_idx = posting_data[3]   # 다음 주소를 할당
 
     return global_lexicon_idf, global_document_weight
+
+
+def query_index(query):
+    '''
+    query에서 형태소를 분리하여, token과 frequency를 dictionary로 반환 합니다.
+    query : 문자열
+    query_repr : {"token": frequency}
+    '''
+    kkma = Kkma().morphs
+    query_repr = defaultdict(int)
+
+    for token in query.split():
+        for morpheme in kkma(token):
+            if len(morpheme) > 1:
+                query_repr[morpheme] += 1
+    
+    return query_repr
+
+
+def eval_query_weight(query_repr, global_lexicon_idf):
+    '''
+    query에서 추출한 형태소들의 TF-IDF 값을 반환 합니다.
+    query_weight : {"token": tf-idf}
+    '''
+    max_freq = max(query_repr.values())
+    query_weight = defaultdict(float)
+
+    for token, freq in query_repr.items():
+        if token in global_lexicon_idf.keys():
+            tf = max_tf(freq, max_freq, 0.5)
+            idf = global_lexicon_idf[token]
+            query_weight[token] = tf * idf
+    
+    return query_weight
+
+
+def euclidian(x, y):
+    '''
+    euclidian distance를 산출 합니다.
+    x: query에서 추출한 token의 query_weight
+    y: document에서 추출한 token의 weight(tfidf)
+    '''
+    return (x-y) **2
+
+
+def inner_product(x, y):    # x는 query_weight, y는 document_weight
+    '''
+    Cosine similarity를 산출 합니다.
+    x: query에서 추출한 token의 query_weight
+    y: document에서 추출한 token의 weight(tfidf)
+    '''
+    return x * y
+
+
+def candidate_list_by_euclidian(query_weight, global_lexicon, twm):
+    candidate_list = dict()
+
+    for index_term, _ in global_lexicon.items():
+        query_tfidf = 0
+
+        if index_term in query_weight.keys():
+            query_tfidf = query_weight[index_term]
+
+        for filename, document_weight in twm[index_term].items():
+            if filename not in candidate_list.keys():
+                candidate_list[filename] = euclidian(query_tfidf, document_weight)
+            else:
+                candidate_list[filename] += euclidian(query_tfidf, document_weight)
+    
+    return candidate_list
+
+
+def candidate_list_by_cosine(query_weight, global_lexicon, global_posting, global_document, global_document_weight):
+    candidate_list = dict()
+
+    for index_term, q_weight in query_weight.items():
+        if index_term in global_lexicon.keys():
+            posting_idx = global_lexicon[index_term]
+
+            while True:
+                if posting_idx == -1:
+                    break
+
+                posting_data = global_posting[posting_idx]
+                posting_idx = posting_data[3]
+                document_weight = posting_data[2]
+
+                if global_document[posting_data[1]] not in candidate_list.keys():
+                    candidate_list[global_document[posting_data[1]]] = inner_product(q_weight, document_weight)
+                else:
+                    candidate_list[global_document[posting_data[1]]] += inner_product(q_weight, document_weight)
+
+    for document_idx, _ in candidate_list.items():
+        candidate_list[document_idx] /= global_document_weight[document_idx]
+
+    return candidate_list
+
+
+def euclidian_sort(candidate_list):
+    '''
+    euclidian distance에 대한 오름차순 정렬
+    '''
+    result_list = sorted(candidate_list.items(), key=lambda x:x[1])
+    return result_list
+
+
+def cosine_sort(candidate_list):
+    '''
+    Cosine similarity에 대한 내림차순 정렬
+    '''
+    result_list = sorted(candidate_list.items(), key=lambda x:x[1], reverse=True)
+    return result_list
+
+
+def result_print(query, result_list, global_document, collection, count=3):
+    print("query: ", query)
+
+    if count > len(result_list):
+        count = len(result_list)
+
+    for i, (document, distance) in enumerate(result_list[:count]):
+        print("순위:{0} / 문서:{1} / 유사도:{2}".format((i+1), document, distance))
+        print("   document:{0}".format(collection[global_document.index(document)]))
+    
+    return None
