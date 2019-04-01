@@ -333,9 +333,6 @@ def tdm2twm(tdm, global_document):
     twm = defaultdict(lambda: defaultdict(float))
     dvw = defaultdict(float)    # document vector weight
 
-    for filename in global_document:
-        dvw[filename] = 0
-    
     for term, tf_list in tdm.items():
         df = len(tf_list)
         # idf = raw_idf(df, document_count)
