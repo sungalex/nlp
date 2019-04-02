@@ -11,6 +11,7 @@ from collections import defaultdict
 from math import log10
 
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 from konlpy.corpus import kobill
 from konlpy.tag import Kkma
@@ -104,7 +105,7 @@ def probability_idf(df, n):
 
 def get_lexicon(corpus=kobill):
     '''
-    corpus 데이터를 인수로 받아서, 공백으로 분리한 lexicon을 반환 합니다.
+    corpus 데이터를 인수로 받아서, 공백으로 분리한 lexicon을 numpy array 형태로 반환 합니다.
     인수 corpus에는 corpus 객체를 전달 합니다.
     default로 konlpy 패키지의 kobill(의안) 자료를 lexicon으로 반환 합니다.
 
@@ -114,74 +115,62 @@ def get_lexicon(corpus=kobill):
 
         lexicon = get_lexicon(corpus=kolaw)
     '''
-    lexicon = set()
-
+    lexicon = np.array(list())
     for document in corpus.fileids():
         content = corpus.open(document).read()
-
-        for token in content.split():
-                lexicon.add(token)
+        lexicon = np.append(lexicon, np.array(content.split()))
                 
-    return list(lexicon)
+    return lexicon
 
 
-def get_dtm_from_konlpy(corpus=kobill, k_morpheme=Kkma):    # Document-Term Metrix
+def get_tfidf_from_konlpy(corpus=kobill, k_morpheme=Kkma):
     '''
-    한국어 형태소 분석기를 이용(default로 Kkma 사용)해서, document-term matrix를 만듭니다.
+    한국어 형태소 분석기를 이용(default로 Kkma 사용)해서, tf-idf를 산출 합니다.
+    sklearn의 TfidfVectorizer를 이용 합니다.
 
-    # dictionary 내에 dictionary를 포함하고 있는 구조
-        {"document1": {"term1": frequency1,
-                       "term2": frequency2,
-                          ...
-                      }
-         "document2": {... 
-                      }
-         ...
-        }
+    return: document list, vectorizer object, tfidf array
+
+    vectorizer object에는 lexicon list가 포함되어 있습니다.
+    아래와 같이 사용할 수 있습니다.
+        lexicon_list = np.array(vectorizer.get_feature_names())
+        lexicon_dict = vectorizer.vocabulary_
     '''
-    dtm = defaultdict(lambda: defaultdict(int))
-
     morpheme = k_morpheme().morphs
 
-    for document in corpus.fileids():
-        content = corpus.open(document).read()
-        
-        for sentence in sent_tokenize(content):
-            for morph in morpheme(sentence):
-                if dtm[document][morph] is None:
-                    dtm[document][morph] = 1
-                else:
-                    dtm[document][morph] += 1
-        
-    return dtm
+    documents = np.array(corpus.fileids())
+    contents = np.array(list())
+
+    for document in documents:
+        contents = np.append(contents, [corpus.open(document).read()])
+    
+    vectorizer = TfidfVectorizer(tokenizer=morpheme)
+    tfidf = vectorizer.fit_transform(contents)
+
+    return documents, vectorizer, tfidf
 
 
-def get_dtm_from_nltk(corpus=gutenberg, e_tokenize=word_tokenize):    # Document-Term Metrix
+def get_tfidf_from_nltk(corpus=gutenberg, e_tokenize=None):
     '''
-    영어 형태소 분석기를 이용(default로 work_tokenize를 사용)해서, document-term matrix를 만듭니다.
+    nltk에서 제공하는 tokenizer를 이용(default로 work_tokenize를 사용)해서, tf-idf를 산출 합니다.
+    sklearn의 TfidfVectorizer를 이용 합니다.
 
-    # dictionary 내에 dictionary를 포함하고 있는 구조
-        {"document1": {"term1": frequency1,
-                       "term2": frequency2,
-                          ...
-                      }
-         "document2": {... 
-                      }
-         ...
-        }
+    return: document list, vectorizer object, tfidf array
+
+    vectorizer object에는 lexicon list가 포함되어 있습니다.
+    아래와 같이 사용할 수 있습니다.
+        lexicon_list = np.array(vectorizer.get_feature_names())
+        lexicon_dict = vectorizer.vocabulary_
     '''
-    dtm = defaultdict(lambda: defaultdict(int))
+    documents = np.array(corpus.fileids())
+    contents = np.array(list())
 
-    for document in corpus.fileids():
-        content = corpus.open(document).read()
-        
-        for token in word_tokenize(content):
-            if dtm[document][token] is None:
-                dtm[document][token] = 1
-            else:
-                dtm[document][token] += 1
-        
-    return dtm
+    for document in documents:
+        contents = np.append(contents, [corpus.open(document).read()])
+    
+    vectorizer = TfidfVectorizer(tokenizer=e_tokenize, stop_words="english")
+    tfidf = vectorizer.fit_transform(contents)
+
+    return documents, vectorizer, tfidf
 
 
 def get_remove_pattern():
@@ -192,14 +181,14 @@ def get_remove_pattern():
         corpus = get_remove_pattern()["email"].sub(" ", corpus)
     '''
     patterns = {}
-    patterns["email"] = re.compile(r"(\w+@[a-zA-Z0-9\-\_]{3,}(.[a-zA-Z]{2,})+)")
-    patterns["url"] = re.compile(r"^(https?:\/\/)?([\w\d-]{3,}(.[a-zA-Z]{2,})+)$")
-    patterns["maxlength"] = re.compile(r"\b[\w\dㄱ-ㅎㅏ-ㅣ가-힣]{8,}\b")
-    patterns["numeric"] = re.compile(r"\b(\d{1}|\d{5,})\b")
-    patterns["non_word"] = re.compile(r"\b[^\w\dㄱ-ㅎㅏ-ㅣ가-힣]{2,}\b")
-    patterns["whitespace"] = re.compile(r"\s{2,}|(\\n){2,}")
-    patterns["punctuation"] = re.compile(r"[%s]{2,}" % re.escape(punctuation))
-    patterns["non_korean"] = re.compile(r"([^ㄱ-ㅎㅏ-ㅣ가-힣]+)")
+    patterns["email"] = re.compile(r"(\w+@[a-zA-Z0-9\-\_]{3,}(\.[a-zA-Z]{2,})+)")
+    patterns["url"] = re.compile(r"(https?:\/\/)?([\w\d-]{3,}(\.[a-zA-Z]{2,})+)")
+    patterns["max_length"] = re.compile(r"(\b[\w\d가-힣]{8,}\b)")
+    patterns["numeric_length"] = re.compile(r"(\b(\d{1}|\d{5,})\b)")
+    patterns["punctuation"] = re.compile(r"([%s]{2,})" % re.escape(punctuation))
+    patterns["invalid_korean"] = re.compile(r"([ㄱ-ㅎㅏ-ㅣ]+)")
+    patterns["whitespace"] = re.compile(r"((\s{2,})+|((\\n){2,})+)")
+    patterns["non_word"] = re.compile(r"([^\w\d가-힣])")
 
     return patterns
 
@@ -209,20 +198,20 @@ def clean_collection(collection):
     collection의 content에 포함된 email, url, 8자 이상의 글자, 숫자(1글자 또는 5자 이상), 
     Non_Word, white space 등을 제거하고 Cleaned collection을 반환 합니다.
 
-    collection은 tuple(document이름, content)들의 리스트 입니다.
+    collection은 list [document이름, content]들의 리스트인 2차원 ndarray 입니다.
     '''
     cleaned_collection = list()
 
     for filename, content in collection:
         cleaned_content = get_remove_pattern()["email"].sub(" ", content)
         cleaned_content = get_remove_pattern()["url"].sub(" ", cleaned_content)
-        cleaned_content = get_remove_pattern()["maxlength"].sub(" ", cleaned_content)
-        cleaned_content = get_remove_pattern()["numeric"].sub(" ", cleaned_content)
-        cleaned_content = get_remove_pattern()["non_word"].sub(" ", cleaned_content)
-        cleaned_content = get_remove_pattern()["whitespace"].sub(" ", cleaned_content)
+        cleaned_content = get_remove_pattern()["max_length"].sub(" ", cleaned_content)
+        cleaned_content = get_remove_pattern()["numeric_length"].sub(" ", cleaned_content)
         cleaned_content = get_remove_pattern()["punctuation"].sub(" ", cleaned_content)
-
-        cleaned_collection.append((filename, cleaned_content))
+        cleaned_content = get_remove_pattern()["invalid_korean"].sub(" ", cleaned_content)
+        cleaned_content = get_remove_pattern()["whitespace"].sub(" ", cleaned_content)
+        cleaned_content = get_remove_pattern()["non_word"].sub(" ", cleaned_content)
+        cleaned_collection.append([filename, cleaned_content])
 
     return cleaned_collection
 
@@ -232,11 +221,11 @@ def extend_lexicon(corpus):
     collection의 document별 content(전처리 된 content)를 받아서 token의 수를 늘려서 lexicon을 반환 합니다.
         --> token = 어절 + 형태소 + 명사 + 바이그램(음절)
     '''
-    extended_lexicon = list()
-    dictTerm = list()
-    dictPOS = list()
-    dictNoun = list()
-    dictNgram = list()
+    extended_lexicon = np.array(list())
+    dictTerm = np.array(corpus.split())
+    dictPOS = np.array(list())
+    dictNoun = np.array(list())
+    dictNgram = np.array(list())
 
     kkma = Kkma()
     
