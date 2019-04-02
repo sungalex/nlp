@@ -71,7 +71,7 @@ def raw_idf(df, n):
     n: document count
     '''
     if n > 0:
-        return np.log10(np.where(df > 0, n/df , 1))
+        return np.log10(n / np.where(df > 0, df, n))
     else:
         return None
 
@@ -84,20 +84,20 @@ def smoothig_idf(df, n):
     n: document count
     '''
     if n > 0:
-        return np.log10(np.where(df > 0, (n+1) / df, 1))
+        return np.log10((n+1) / np.where(df > 0, df, n+1))
     else:
         return None
 
 
 def probability_idf(df, n):
     '''
-    return: log10((n-df+1)/df)    # N - df가 0이 되는 것을 방지하기 위해 1을 더함
+    return: log10((n-df)/df)    # N - df가 0이면 0을 return 하도록 조건 검사
 
     df: document frequency
     n: document count
     '''
-    if n > 0:
-        return np.log10(np.where(df > 0, (n-df+1)/df, 1))
+    if n > 0 or max(df) > n:
+        return np.log10(np.where(n-df != 0, ((n-df) / np.where(df > 0, df, (n-df))), 1))
     else:
         return None
 
