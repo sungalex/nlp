@@ -5,6 +5,7 @@ naver.py : Naver 실시간 주요 News Scraping을 위한 메서드를 정의 �
 명칭에 "underscore"을 prefix로 추가해서 숨김(private) 처리 했습니다.
 '''
 import os
+import sys
 import re
 from datetime import datetime
 
@@ -89,13 +90,13 @@ class NewsScraping():
 
         return self
 
-    def _make_savedir(self):
+    def _make_savedir(self, default_path="naver_news"):
         '''
         naver_news 아래에 현재 시간("년-월-일_시간_분")으로 폴더를 만듭니다.
         '''
         now = datetime.now().isoformat()
         day_hour_minute = now[:10] + "_" + now[11:13] + "-" + now[14:16]
-        self._path = "naver_news/" + day_hour_minute
+        self._path = os.path.join(default_path, day_hour_minute)
 
         try:
             if not os.path.exists(self._path):
@@ -105,7 +106,7 @@ class NewsScraping():
             print("(%s) 디렉토리를 만들 수 없습니다!" % (self._path))
             return None
 
-    def download(self):
+    def download(self, default_path="naver_news"):
         '''
         기사 다운로드 후 본문을 저장하고, 기사 랭크, 제목, url을 csv 파일로 저장합니다.
 
@@ -117,7 +118,7 @@ class NewsScraping():
         '''
         self._get_categorys()
         self._get_newslists()
-        self._make_savedir()
+        self._make_savedir(default_path=default_path)
 
         print("뉴스 기사 다운로드 중...")
         for idx, section in enumerate(self._newslists):
@@ -147,28 +148,28 @@ class NewsScraping():
                 with open(fullPath, "w") as f:
                     f.write(contents_)
 
-        csvFileName = "naver_news/newslist-" + self._path.split(
-            "/")[-1] + ".csv"
+        csvFileName = os.path.join(default_path, 
+                      "newslist-" + self._path.split("/")[-1] + ".csv")
         df = pd.DataFrame(np.array(self._newslists).reshape(-1, 3))
         df.to_csv(csvFileName, header=False, index=False)
 
         print("{0} 폴더에 뉴스 기사 다운로드 완료".format(self._path))
         return self._newslists
 
-    def _get_dirs(self):
+    def _get_dirs(self, default_path="naver_news"):
         '''
         "naver_news" 폴더 아래의 폴더 리스트를 self._dirs에 저장 합니다.
         폴더 리스트의 마지막 원소에 가장 최근의 뉴스 폴더가 저장되도록 sort 합니다.
         '''
-        for entry in os.listdir("naver_news/"):
-            if os.path.isdir(os.path.join("naver_news/", entry)) == True:
-                self._dirs.append(os.path.join("naver_news/", entry))
+        for entry in os.listdir(default_path):
+            if os.path.isdir(os.path.join(default_path, entry)) == True:
+                self._dirs.append(os.path.join(default_path, entry))
 
         self._dirs.sort()
 
         return self
 
-    def get_filenames(self, all_folder=False, section=None):
+    def get_filenames(self, default_path="naver_news", all_folder=False, section=None):
         '''
         가장 최근 저장된 뉴스 기사 폴더 이름을 포함한 파일명 리스트를 반환 합니다.
         '''
@@ -180,7 +181,7 @@ class NewsScraping():
         else:
             sections = [self._category_codes[section]]
 
-        self._get_dirs()
+        self._get_dirs(default_path=default_path)
         if all_folder == False:
             files = os.listdir(self._dirs[-1])
             for file in files:
@@ -200,7 +201,7 @@ class NewsScraping():
 
         return self._filenames
 
-    def get_articles(self, section=None):
+    def get_articles(self, default_path="naver_news", section=None):
         '''
         다운로드 한 기사 내용을 읽어옵니다.
 
@@ -212,7 +213,7 @@ class NewsScraping():
         '''
         self._articles = ""
 
-        self.get_filenames()
+        self.get_filenames(default_path=default_path)
 
         if section is None:
             sections = ['00', '01', '02', '03', '04', '05']
@@ -229,7 +230,7 @@ class NewsScraping():
 
         return self._articles
 
-    def get_article(self, section='경제', n_articles=1):
+    def get_article(self, default_path="naver_news", section='경제', n_articles=1):
         '''
         다운로드 한 기사 내용 중 지정한 섹션의 첫번째 기사를 읽어옵니다.
 
@@ -245,7 +246,7 @@ class NewsScraping():
         for rank in range(1, n_articles + 1):
             n_ranks.append(self._ranks[str(rank)])
 
-        self.get_filenames()
+        self.get_filenames(default_path=default_path)
 
         for filename in self._filenames:
             code = filename.split("/")[-1].split("-")[0:2] #[0]:섹션코드, [1]:rank
@@ -257,7 +258,7 @@ class NewsScraping():
 
         return self._article
 
-    def get_all_articles(self, section=None):
+    def get_all_articles(self, default_path="naver_news", section=None):
         '''
         누적된 다운로드 기사 내용 전체를 읽어옵니다.
 
@@ -269,7 +270,7 @@ class NewsScraping():
         '''
         self._all_articles = ""
 
-        self.get_filenames(all_folder=True)
+        self.get_filenames(default_path=default_path, all_folder=True)
 
         if section is None:
             sections = ['00', '01', '02', '03', '04', '05']
