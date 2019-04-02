@@ -10,6 +10,8 @@ from string import punctuation
 from collections import defaultdict
 from math import log10
 
+import numpy as np
+
 from konlpy.corpus import kobill
 from konlpy.tag import Kkma
 
@@ -24,14 +26,17 @@ def raw_tf(freq):
     '''
     return: freq
     '''
-    return freq
+    return np.where(freq > 0, freq, 0)
 
 
-def norm_tf(freq, total_count):
+def norm_tf(freq, total_freq=1):
     '''
-    return: freq / total_count
+    return: freq / total_freq
     '''
-    return freq / total_count
+    if total_freq > 0:
+        return np.where(freq > 0, freq, 0) / total_freq
+    else:
+        return None
 
 
 def log_tf(freq):
@@ -39,10 +44,11 @@ def log_tf(freq):
     return: 1+log10(freq), if freq > 0
             0, otherwise
     '''
-    if freq > 0:
-        return 1+log10(freq)
-    else:
-        return 0
+    # if freq > 0:
+    #     return 1+log10(freq)
+    # else:
+    #     return 0
+    return np.log10(np.where(freq > 0, freq, 1))
 
 
 def max_tf(freq, max_freq, alpha=0.5):
@@ -50,29 +56,50 @@ def max_tf(freq, max_freq, alpha=0.5):
     alpha(0<alpha<1)와 1 사이의 값으로 정규화 됨 (double normalization K)
     return: alpha + (1-alpha) * (freq / max_freq)
     '''
-    return alpha + (1-alpha) * (freq / max_freq)
+    if max_freq > 0:
+        return alpha + (1-alpha) * (np.where(freq > 0, freq, 0) / max_freq)
+    else:
+        return None
 
 
 def raw_idf(df, n):
     '''
-    # 일반적인 IDF
+    # 일반적인 IDF 정의
     return: log10(n/df)
+
+    df: document frequency
+    n: document count
     '''
-    return log10(n/df)
+    if n > 0:
+        return np.log10(np.where(df > 0, n/df , 1))
+    else:
+        return None
 
 
 def smoothig_idf(df, n):
     '''
     return: log10((n+1)/df)
+
+    df: document frequency
+    n: document count
     '''
-    return log10((n+1)/df)
+    if n > 0:
+        return np.log10(np.where(df > 0, (n+1) / df, 1))
+    else:
+        return None
 
 
 def probability_idf(df, n):
     '''
     return: log10((n-df+1)/df)    # N - df가 0이 되는 것을 방지하기 위해 1을 더함
+
+    df: document frequency
+    n: document count
     '''
-    return log10((n-df+1)/df)
+    if n > 0:
+        return np.log10(np.where(df > 0, (n-df+1)/df, 1))
+    else:
+        return None
 
 
 def get_lexicon(corpus=kobill):
