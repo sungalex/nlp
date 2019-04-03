@@ -26,7 +26,7 @@
 1. 프로젝트 비정형 데이터를 이용한 검색엔진 ([Code](lecture20-project2-Information_Retrieval_System.ipynb))
 1. 특강 - 딥러닝 활용사례 및 실습 (Tensorflow) ([자료](./documents/21.인공지능특강_190401.pdf)) ([Code](lecture21-tensorflow_keras.ipynb))
 1. 문서분류 - kNN ([Code](lecture22-classification_statistical_probabilistic.ipynb))
-1. 프로젝트 뉴스 자동 분류(카테고리 분류) ([Code]](lecture23-project3-Information_Retrieval-KNN_category_classification.ipynb))
+1. 프로젝트 뉴스 자동 분류(카테고리 분류) ([Code](lecture23-project3-Information_Retrieval-KNN_category_classification.ipynb))
 1. 문서분류 - 나이브 베이즈
 1. 프로젝트 스팸 자동 분류
 1. 특강
