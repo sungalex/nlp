@@ -221,25 +221,18 @@ def extend_lexicon(corpus):
     collection의 document별 content(전처리 된 content)를 받아서 token의 수를 늘려서 lexicon을 반환 합니다.
         --> token = 어절 + 형태소 + 명사 + 바이그램(음절)
     '''
-    extended_lexicon = np.array(list())
-    dictTerm = np.array(corpus.split())
-    dictPOS = np.array(list())
-    dictNoun = np.array(list())
-    dictNgram = np.array(list())
-
     kkma = Kkma()
-    
-    for token in corpus.split():
-        if len(token) > 1:
-            dictTerm.append(token)
-            dictPOS.extend([morpheme for morpheme in kkma.morphs(token) if len(morpheme) > 1])
-            dictNoun.extend([noun for noun in kkma.nouns(token) if len(noun) > 1])
-            dictNgram.extend(ngram.ngramUmjeol(token))
+    extended_lexicon = np.array(list())
 
-    extended_lexicon.extend(dictTerm)
-    extended_lexicon.extend(dictPOS)
-    extended_lexicon.extend(dictNoun)
-    extended_lexicon.extend(dictNgram)
+    term_list = np.array([term for term in np.array(corpus.split()) if len(term) > 1])
+    pos_list = np.array([morphs for morphs in np.array(kkma.morphs(corpus)) if len(morphs) > 1])
+    noun_list = np.array([noun for noun in np.array(kkma.nouns(corpus)) if len(noun) > 1])
+    ngram_list = np.array([_ for token in term_list for _ in ngram.ngramUmjeol(token)])
+
+    extended_lexicon = np.append(extended_lexicon, term_list)
+    extended_lexicon = np.append(extended_lexicon, pos_list)
+    extended_lexicon = np.append(extended_lexicon, noun_list)
+    extended_lexicon = np.append(extended_lexicon, ngram_list)
 
     return extended_lexicon
 
