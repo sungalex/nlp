@@ -4,6 +4,8 @@ n-gram을 구현 합니다.
 import re
 from string import punctuation
 
+import numpy as np
+
 from nltk.tokenize import word_tokenize
 from konlpy.tag import Kkma
 
@@ -30,22 +32,16 @@ def ngramEojeol(sentence, n=2):
     pattern = re.compile(r"[{0}]".format(re.escape(punctuation)))
     sentence = pattern.sub("", sentence)
 
-    # word_tokenize
-    tokens = word_tokenize(sentence)
+    # tokenize
+    tokens = np.array([token for token in np.array(word_tokenize(sentence)) if token not in stopwords])
 
-    # stopwords
-    clean_tokens = []
-    for token in tokens:
-        if token is not stopwords:
-            clean_tokens.append(token)
+    # Eojeol
+    eojeol = np.array(list())
     
-    # ngram
-    ngram = []
-    
-    for i in range(len(clean_tokens) - n + 1):
-        ngram.append(" ".join(clean_tokens[i:i+n]))    # 공백을 추가해줘야 단어 사이가 구분됨
+    for i in np.arange(len(tokens) - n + 1):
+        eojeol = np.append(eojeol, "".join(tokens[i:i+n]))    # 단어 n 개를 붙여서 하나의 어절 생성
         
-    return ngram
+    return eojeol
 
 
 # 음절 단위의 ngram (n=2)
@@ -68,10 +64,9 @@ def ngramUmjeol(term, n=2):
     pattern = re.compile(r"[{0}]".format(re.escape(punctuation)))
     term = pattern.sub("", term)
 
-    # ngram
-    ngram = []
+    umjeol = np.array(list())
     
-    for i in range(len(term) - n + 1):
-        ngram.append("".join(term[i:i+n]))    # 공백 없이 붙여서 단어를 만듦
+    for i in np.arange(len(term) - n + 1):
+        umjeol = np.append(umjeol, "".join(term[i:i+n]))    # 공백 없이 붙여서 단어를 만듦
         
-    return ngram
+    return umjeol
