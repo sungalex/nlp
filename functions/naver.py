@@ -286,3 +286,11 @@ class NewsScraping():
                 continue
 
         return self._all_articles
+
+    def get_content(file, default_path=None):
+        content = ""
+
+        with open(os.path.join(default_path, file), encoding="utf-8") as f:
+            content = f.read()
+
+        return content
