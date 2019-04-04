@@ -1,0 +1,59 @@
+Competition Launch: Freesound Audio Tagging 2019
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+Hi @cloudai,
+We're excited to let you know about the launch of the Freesound Audio Tagging 2019 research competition. Click the button at the bottom of this email to learn more and get started!
+Can you recognize sounds and apply multiple tags of varying nature -- automatically?
+About the CompetitionIn this competition, Kagglers will develop an algorithm to tag audio data automatically using a diverse vocabulary of 80 categories.
+This competition is framed under the fifth edition of the Detection and Classification of Acoustic Scenes and Events (DCASE) Challenge. DCASE 2019 Challenge features 5 tasks and Freesound Audio Tagging II is Task 2. Click here to read more about DCASE.
+About the HostA year ago, Freesound (an initiative by MTG-UPF that maintains a collaborative database with over 400,000 Creative Commons Licensed sounds) and Google Research’s Machine Perception Team (creators of AudioSet, a large-scale dataset of manually annotated audio events with over 500 classes) hosted an audio tagging competition challenging Kagglers to build a general-purpose auto tagging system. This year they’re back and taking the challenge to the next level with multi-label audio tagging, doubled number of audio categories, and a noisier than ever training set.
+Prizes:$5,000 Total prize pool
+Next important deadline:June 3, 2019 - Entry deadline.
+Join the competition
+Good luck,Walter ReadeKaggle Data Scientist
+
+
+
+
+
+
+
+
+Unsubscribe from our emails
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

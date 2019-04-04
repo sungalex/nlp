@@ -1,0 +1,138 @@
+RE: do companies actually pay people to do this?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hi alex,
+
+Last week, I shared with you the private launch of Testera, which directly connects companies with user testers, and invited you to register as a user to earn up to $150/hour by helping companies test exciting new ideas and features.
+
+I got feedback from several people who tried to sign up from their mobile phones that the chat widget was covering the submit button, which prevented them from getting in, so we just released a fix for that bug.
+
+Try it out here, and let me know if you still can't get in.
+
+We will be launching the website publicly next week, so there will be a lot of user studies for you to participate in soon.
+
+Some people also requested the ability to sign up as both testers, and as companies to hire other testers, so we also enabled this feature in the latest release.
+
+If you're looking for user testers, sign up as a company (no credit card required), fill out the criteria for your target audience, and I will personally follow up with you to publish your project if we have qualified candidates matching your search criteria in our database.
+
+Thank you for your ongoing feedback and support; it's always great to hear back from you!
+All the best
+Amir
+
+P.S. To make it up to you for messing up the chat widget on the website last week, I am making my eBook "Fake it make it" free this week, until midnight Friday. Grab it here.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hi alex,
+
+Hope you're having a great week so far!
+
+I am sending this email to a very small group of my favorite folks, so please read on. 
+As you may know, launching new products and features successfully requires a fair amount of user testing. And for many companies, finding the right users to validate new ideas costs a lot of time and money. 
+
+Companies typically spend over an hour of staff time to find one qualified candidate, or hire outside agencies, and pay them up to $165 per candidate in recruitment fees. That doesn't even include the incentive they pay each candidate for participating in their studies. And the worst part is it takes those agencies 2-3 weeks to find just 10 candidates!
+
+Even products like UserTesting.com stand as middlemen between companies and their participants.
+
+That's why, a couple of months ago, I started thinking about a service that would work like Uber for user testing, allowing companies to instantly find hire qualified user testing participants, without having to go through middlemen, and without paying recruitment fees.
+
+And that's where the idea for Testera was born: a marketplace of user testers where companies can find and hire candidates directly, and where participants can earn money helping those companies test new ideas.
+
+Anyone can create a profile and enter their demographic information (age, gender, race, etc.), and every time a company publishes a new study with a specific target audience in mind, Testera emails matching candidates to apply for that study.
+
+If their application is accepted, their contact information is shared with the company, and they can communicate participation instructions (online, in person, etc.).
+
+Once the study is done, users get paid on the same day.
+
+Today, I am sharing with you the link to Testera privately (please don't share it publicly, as it's still in beta), and I would love for you to register as a candidate, and fill out your profile information (it takes less than a minute), so I can start notifying you when companies want to hire you for a user study.
+
+You can get paid up to $150/hour to help those companies, so it's a great side-gig!
+
+Next week, I will be reaching out to a few companies that I know are looking for new users for usability studies, remote testing, and focus groups, and will notify you if your profile matches their target audience.
+
+And if you are looking to hire candidates for user testing, let me know and I will hook up you with a $100 off coupon to try the company side of the service.
+
+As always, I would love to hear your feedback, comments, and any concerns you have about Testera.
+
+Looking forward to hearing from you, and to having you onboard this journey.
+
+All the best
+Amir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Amir Khella 
+  Entrepreneur/Designer/Consultant
+  khella.com | LinkedIn | Twitter
+
+
+
+
+
+
+
+
+
+
+
+
+
+Want to change how you receive product updates?
+You can update your preferences or unsubscribe from this list
+
+
+
+
+
+
+
+
+
+
+
+
+
+

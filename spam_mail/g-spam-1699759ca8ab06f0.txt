@@ -1,0 +1,52 @@
+Learn S/4 HANA FICO
+
+
+Hi Alex,
+
+
+S/4 HANA is now adding more and more configurations in GL which was traditionally available in COPA such as break down of variance, COGS split.  User defined currencies can now be added, which can have deviation from CO and  Asset Accounting and Materials
+
+The entire material for S/4 HANA is now available for  an opportunity cost  of  299 USD.
+
+It will incude the following:-
+1) General Ledger (includes video training)
+2) Asset Accounting (includes video training)
+3) Accounts Receivable and Payable (inclues video training)
+4) Bank (includes configuration and user training manual)
+5) Cost center (includes video training)
+6) Product costing (includes video training)
+7) Profitabilty Analysis (includes video training)
+8) Question and Anawers
+
+At a price of 299 USD - only for next 3days.
+
+S/4 HANA Training material
+
+
+
+Preview material link:-
+
+https://www.youtube.com/watch?v=UqIHsUQisk4
+
+https://www.youtube.com/watch?v=Afo7nZ-bbJc
+
+http://sapficoconsultant.com/SAP S4 HANA GL configuration.pdf
+
+
+http://sapficoconsultant.com/S4 HANA Profitability Analysis configuration.pdf
+
+http://sapficoconsultant.com/S4%20HANA%20New%20Asset%20Accounting%20Configuration_V2.pdf
+
+The entire material will be provided as download link within 24 hours of purchase
+
+Best Regards,
+
+Aditya
+www.sapficoconsultant.com
+Mumbai, Maharashtra,
+India
+
+Unsubscribe me from this database
+
+ 
+

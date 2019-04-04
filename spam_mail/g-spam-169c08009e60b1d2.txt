@@ -1,0 +1,44 @@
+Basic SAP FICO integration topics
+
+
+Hi Alex,
+
+
+Many experienced consultants stumble on some of the basic integration questions in FICO if there is a twist.
+
+Question 1:
+
+Business requirement to trigger  separate GL accounts based on different material in SD billing. Material 1 to post to Sale account 300000 and Material 2 to post to 300001.
+
+This question is a real application of your configuration knowledge and how to trigger this, but many consultants are not even able to answer this basic question.
+
+Answer : This is possible by configuring different Material Grp/Acct key set up in the VKOA set up.
+
+Question 2:
+
+Where is the Material Grp/Acct key assigned ?
+
+Here again many consultants fumble or not aware of basic concepts
+
+Answer : The Material Grp is assigned in the sales view of the material master. Account key is assigned to the SD pricing procedure to various condition types.
+
+To answer and clarify all your concepts get the SAP ECC FICO Configuration Set.
+
+At a price of 150 USD - only for next 3days.
+
+ECC Training material
+
+
+The material does not include any videos.
+
+Best Regards,
+
+Aditya
+www.sapficoconsultant.com
+Mumbai, Maharashtra,
+India
+
+Unsubscribe me from this database
+
+ 
+

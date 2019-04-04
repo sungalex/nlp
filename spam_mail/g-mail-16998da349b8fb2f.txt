@@ -1,0 +1,55 @@
+[새 글] “[개정판] 파이썬 라이브러리를 활용한 머신러닝”이 출간되었습니다!
+
+
+
+박해선님의 글: "안드레아스 뮐러Andreas Mueller와 세라 가이도Sarah Guido의 베스트 셀러 "Introduction to Machine Learning with Python"의 번역서인 "파이썬 라이브러리를 활용한 머신러닝"이 개정판으로 새롭게 출간되었습니다!
+지난해 10월 원서 저자들이 최신 사이킷런 버전에서 추가된 내용을 반영하여 새롭게 원서를 릴리스했습니다. 원서에서 바뀐 부분을 번역서에 반영하기에는 변경사항이 너무 많아 난처했습니다.
+다행히 "	
+
+이 라인 위에 답변을 달아 이 글에 답하기
+
+
+
+
+
+텐서 플로우 블로그 (Tensor ≈ Blog)의 새 글	
+
+
+
+
+
+
+
+
+
+“[개정판] 파이썬 라이브러리를 활용한 머신러닝”이 출간되었습니다!
+박해선 님이 만듬 
+
+
+안드레아스 뮐러Andreas Mueller와 세라 가이도Sarah Guido의 베스트 셀러 "Introduction to Machine Learning with Python"의 번역서인 "파이썬 라이브러리를 활용한 머신러닝"이 개정판으로 새롭게 출간되었습니다! 지난해 10월 원서 저자들이 최신 사이킷런 버전에서 추가된 내용을 반영하여 새롭게 원서를 릴리스했습니다. 원서에서 바뀐 부분을 번역서에 반영하기에는 변경사항이 너무 많아 난처했습니다. 다행히 출판사와 협의하여 새롭게 개정판을 준비할 수 있었습니다. 그동안 많은 독자들에게 사랑을 받았던 […]
+이 포스트의 모든 글 읽기
+ 
+
+박해선 | 2019-03-20 11:06 오전 | 태그: Andreas Muller, Introduction to Machine Learning with Python, Machine Learning, Python, Sarah Guido, scikit-learn
+| 카테고리: Book, Machine Learning, News, scikit-learn
+| URL: https://wp.me/p6W2qc-8d5 
+
+댓글 달기
+   모든 댓글 보기
+
+
+
+
+텐서 플로우 블로그 (Tensor ≈ Blog)에서 더 이상 글을 받지 않으려면 구독을 해지하세요.구독 관리에서 이메일 설정을 변경하세요.	
+
+클릭을 할 수 없나요? 이 URL을 브라우저에 복사하여 붙여넣으세요: http://tensorflow.blog/2019/03/20/%ea%b0%9c%ec%a0%95%ed%8c%90-%ed%8c%8c%ec%9d%b4%ec%8d%ac-%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%9c-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d%ec%9d%b4-%ec%b6%9c/
+
+
+
+
+
+
+
+워드프레스닷컴을 이용해 주셔서 감사합니다.	
+
+

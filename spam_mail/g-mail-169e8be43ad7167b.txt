@@ -1,0 +1,109 @@
+You’re on your own
+
+
+
+
+
+
+
+
+Hey there,
+
+Sometimes, when life hands you lemons, you just gotta make some lemonade.
+
+Good things like to hide in plain sight, and what you might consider to be a major setback could in fact be a huge opportunity for growth.
+
+Over on Twitter, Real Python follower “Beareroftruth” is experiencing something like this right now:
+
+~ ~ ~
+
+Hello @realpython I have a situation.  I got my first junior mid level python job.  There was supposed to be a senior Dev but he left now it’s just me.  I’m freaking out, any suggestions?
+
+~ ~ ~
+
+Ouch, that sounds absolutely terrifying, especially for a junior dev who is just starting out in the field.
+
+Imagine...
+
+You’re coming in on your first Python job, fully expecting to have someone there to show you the ropes, get you on board, and help ease you into your new role.
+
+And suddenly, that person is gone!
+
+It’s a pretty nerve-wracking experience…
+
+But situations like these are the perfect chance for you to really step up to the plate and show what you’re made of.
+
+If you ever find yourself in a situation like this, then here’s how to quickly turn things in your favor:
+
+The first step is to get a support system in place. 
+
+Surround yourself with people who can help you succeed in your new, uncertain environment—
+
+Ask your company if they can hire a short-term consultant as a mentor or coach to help get you up to speed. 
+
+Or, reach out to a co-worker and see if they’d be willing to be your sounding buddy. 
+
+Make contact with the Python community, either online via forums and chat groups, or in-person at conferences and meetups.
+
+Bottom line is, you have to ask for help. Don’t be afraid to do this! Your co-workers and manager(s) want you to succeed just as much as you do.
+
+Once you’ve got good people around you, it’s time to take your learning into your own hands:
+
+As a developer, you’ll never stop learning new things. But the learning curve is steeper without someone in place to guide you.
+
+I’m not going to sugarcoat it—in a “sink or swim” situation like this you’ll likely have to fight hard and burn the midnight oil for a couple of months to prevail.
+
+But when you come out the other end you’ll have vastly improved your confidence and business value as a developer.
+
+So, commit to setting aside an hour or two each day to focus on learning a new tool, concept, or technique. 
+
+Think about what you might need to perform well in your job, and find tutorials that will walk you through those processes.
+
+At Real Python we have hundreds of tutorials that will teach you everything from setting up a virtual environment to deploying a finished Python app with Docker.
+
+Plus, as a member, you’ll get access to our entire video course library, interactive quizzes, learning paths, and bonus resources to level-up your coding skills. It’s like a “gym for Pythonistas” with new classes you can take every week.
+
+(Also, you’ll get to chat with other Pythonistas and the RP Tutorial Team in the Real Python Slack community—another support system at your fingertips!)
+
+You can learn more here:
+
+→ Real Python Courses & Membership benefits
+
+Stay positive. You’ll get through this.
+
+— Dan Bader
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To make sure you keep getting these emails, please add info@realpython.com to your address book or whitelist us. Want out of the loop? Unsubscribe.
+
+308 E. 5th Ave, Vancouver BC V5T 1H4
+
+
+
+
+
+
+
+
