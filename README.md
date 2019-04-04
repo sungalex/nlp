@@ -71,3 +71,4 @@ jupyter notebook에서 기능을 테스트 했습니다.
 1. [test/ppomppu_Freeboard_class_test.ipynb](./test/ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
 1. [test/naver_news_scraping_test.ipynb](./test/naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
 1. [test/information_retrieval_test.ipynb](./test/information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
+1. [test/mail_sraping_test-naver_mail-gmail.ipynb](./test/mail_sraping_test-naver_mail-gmail.ipynb) : mail scraping 기능 테스트
