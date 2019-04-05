@@ -28,7 +28,7 @@
 1. 문서분류 - kNN ([Code](lecture22-classification_statistical_probabilistic.ipynb))
 1. 프로젝트 뉴스 자동 분류(카테고리 분류) ([Code](lecture23-project3-Information_Retrieval-KNN_category_classification.ipynb))
 1. 문서분류 - 나이브 베이즈 ([Code](lecture24-Naive_Bayes_Classification.ipynb))
-1. 프로젝트 스팸 자동 분류
+1. 프로젝트 스팸 자동 분류 ([Code](lecture25-project4-spam-mail_classification.ipynb))
 1. 특강
 1. 성능평가 - 정확율, 재현율
 1. 프로젝트 자동분류 성능평가
