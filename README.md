@@ -31,7 +31,7 @@
 1. 프로젝트 스팸 자동 분류 ([Code](lecture25-project4-spam-mail_classification.ipynb))
 1. 특강 - 딥러닝을 이용한 금융서비스 사례 / 음성인식 개요 및 사례 ([Code](lecture26-특강-금융_모델링_Use_Case-Fraud_Detection.ipynb))
 1. 성능평가 - 정확율, 재현율, F-Measure ([Code](lecture27-Evaluation-정확도_재현율_F-Measure.ipynb))
-1. 프로젝트 - 스팸자동분류 성능평가
+1. 프로젝트 - 스팸자동분류 성능평가 ([Code](lecture28-project5-뉴스기사분류_성능평가.ipynb))
 1. 군집화 - KMeans
 1. 군집화 - 어휘 클러스터, 시각화
 1. 특강
