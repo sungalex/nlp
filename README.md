@@ -33,8 +33,8 @@
 1. 성능평가 - 정확율, 재현율, F-Measure ([Code](lecture27-Evaluation-정확도_재현율_F-Measure.ipynb))
 1. 프로젝트 - 스팸자동분류 성능평가 ([Code](lecture28-project5-뉴스기사분류_성능평가.ipynb))
 1. 군집화 - KMeans ([Code](lecture29-군집화_KMeans.ipynb))
-1. 군집화 - 어휘 클러스터, 시각화
-1. 특강
+1. 군집화 - 어휘 클러스터, 시각화 ([Code1](lecture30-군집화-어휘_클러스터_시각화(29강_포함).ipynb)) ([Code2](lecture30-project6-뉴스데이터_클러스터_시각화.ipynb))
+1. 특강 - 영상인식 사례, 딥러닝 실습 ([Code1](lecture31-케라스_창시자에게_배우는_딥러닝-2.1-a-first-look-at-a-neural-network.ipynb)) ([Code2](lecture31-케라스_창시자에게_배우는_딥러닝-5.1-introduction-to-convnets.ipynb))
 1. 토픽분석 - LSA
 1. 토픽분석 - LDA
 1. 프로젝트 최신 트렌드 분석
