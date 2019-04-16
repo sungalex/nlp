@@ -4,11 +4,11 @@
 
 ## 목차
 
-1. 자연어처리 소개 및 분석과정 ([자료](./documents/01\.NLP%20-%20자연어처리%20소개%20및%20분석과정.pdf))
-1. 비정형 데이터 - HTTP, Urllib, Requests ([자료1](./documents/02\.HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pdf)) ([자료2](./documents/02.20190305(인공지능%20고급반).html)) ([Code](lecture02-HTTP.ipynb))
-1. 특강 - git Advanced ([자료1](./documents/03\.오픈소스개발방식_QA통합_git_advanced.pdf)) ([자료2](./documents/03\.Git-training-v3.pdf))
-1. Cookie / Session ([자료](./documents/04\.20190307(인공지능%20고급반)%20-%20cookie_session.html)) (Code는 [2강 Code](lecture02-HTTP.ipynb)의 끝부분 참조)
-1. 웹 크롤링 - DOM ([자료1](./documents/05\.웹%20크롤링%20-%20DOM.pdf)) ([자료2](./documents/05.20190308(인공지능%20고급반).html)) ([Code](lecture05-DOM.ipynb))
+1. 자연어처리 소개 및 분석과정 ([자료](./documents/01.NLP%20-%20자연어처리%20소개%20및%20분석과정.pdf))
+1. 비정형 데이터 - HTTP, Urllib, Requests ([자료1](./documents/02.HTTP%20-%20비정형%20데이터%20-%20HTTP_Urllib_Requests.pdf)) ([자료2](./documents/02.20190305(인공지능%20고급반).html)) ([Code](lecture02-HTTP.ipynb))
+1. 특강 - git Advanced ([자료1](./documents/03.오픈소스개발방식_QA통합_git_advanced.pdf)) ([자료2](./documents/03.Git-training-v3.pdf))
+1. Cookie / Session ([자료](./documents/04.20190307(인공지능%20고급반)%20-%20cookie_session.html)) (Code는 [2강 Code](lecture02-HTTP.ipynb)의 끝부분 참조)
+1. 웹 크롤링 - DOM ([자료1](./documents/05.웹%20크롤링%20-%20DOM.pdf)) ([자료2](./documents/05.20190308(인공지능%20고급반).html)) ([Code](lecture05-DOM.ipynb))
 1. 웹 크롤링 - Selector ([자료1](./documents/06.Crawling.pdf)) ([자료2](./documents/06.20190311(인공지능%20고급반).html)) ([Code](lecture06-CSS_Selector_crawling.ipynb))
 1. 웹 스크래핑 - 정적 콘텐츠 ([자료1](./documents/07.Scraping.pdf)) ([자료2](./documents/07.20190312(인공지능%20고급반).html)) ([Code](lecture07-scraping.ipynb))
 1. 웹 스크래핑 - 동적 콘텐츠 ([자료1](./documents/08.DHTML.pdf)) ([자료2](./documents/08.20190313(인공지능%20고급반).html)) ([Code](lecture08-scraping-DHTML.ipynb))
@@ -35,15 +35,15 @@
 1. 군집화 - KMeans ([Code](lecture29-군집화_KMeans.ipynb))
 1. 군집화 - 어휘 클러스터, 시각화 ([Code1](lecture30-군집화-어휘_클러스터_시각화(29강_포함).ipynb)) ([Code2](lecture30-project6-뉴스데이터_클러스터_시각화.ipynb))
 1. 특강 - 영상인식 사례, 딥러닝 실습 ([Code1](lecture31-케라스_창시자에게_배우는_딥러닝-2.1-a-first-look-at-a-neural-network.ipynb)) ([Code2](lecture31-케라스_창시자에게_배우는_딥러닝-5.1-introduction-to-convnets.ipynb))
-2. 토픽분석 - LSA_SVD ([자료](./documents/32.Latent_Semantic_Indexing.pdf)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
-3. 토픽분석 - LDA
-4. 프로젝트 최신 트렌드 분석
-5. 감성분석 - 감성사전
-6. 감성분석 - PMI, SO
-7. 단어 임베딩
-8. Gensim 활용
-9. Keras 활용(1) - CNN
-10. Keras 활용(2) - RNN(LSTM)
+1. 토픽분석 - LSA_SVD ([자료](./documents/32.Latent_Semantic_Indexing.pdf)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
+1. 토픽분석 - LDA
+1. 프로젝트 최신 트렌드 분석
+1. 감성분석 - 감성사전
+1. 감성분석 - PMI, SO
+1. 단어 임베딩
+1. Gensim 활용
+1. Keras 활용(1) - CNN
+1. Keras 활용(2) - RNN(LSTM)
 
 강의 계획 기준으로 목차를 작성하였습니다. 실제 강의 내용을 반영하여 수정 예정입니다.
 (강의 일정 : 2019.3.4 ~ 2019.4.26)
