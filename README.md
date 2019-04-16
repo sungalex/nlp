@@ -35,15 +35,15 @@
 1. 군집화 - KMeans ([Code](lecture29-군집화_KMeans.ipynb))
 1. 군집화 - 어휘 클러스터, 시각화 ([Code1](lecture30-군집화-어휘_클러스터_시각화(29강_포함).ipynb)) ([Code2](lecture30-project6-뉴스데이터_클러스터_시각화.ipynb))
 1. 특강 - 영상인식 사례, 딥러닝 실습 ([Code1](lecture31-케라스_창시자에게_배우는_딥러닝-2.1-a-first-look-at-a-neural-network.ipynb)) ([Code2](lecture31-케라스_창시자에게_배우는_딥러닝-5.1-introduction-to-convnets.ipynb))
-1. 토픽분석 - LSA_SVD ([자료](./documents/32.Latent_Semantic_Indexing.pdf)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis-SVD(Singular_Value_Decomposition).ipynb)))
-1. 토픽분석 - LDA
-1. 프로젝트 최신 트렌드 분석
-1. 감성분석 - 감성사전
-1. 감성분석 - PMI, SO
-1. 단어 임베딩
-1. Gensim 활용
-1. Keras 활용(1) - CNN
-1. Keras 활용(2) - RNN(LSTM)
+2. 토픽분석 - LSA_SVD ([자료](./documents/32.Latent_Semantic_Indexing.pdf)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
+3. 토픽분석 - LDA
+4. 프로젝트 최신 트렌드 분석
+5. 감성분석 - 감성사전
+6. 감성분석 - PMI, SO
+7. 단어 임베딩
+8. Gensim 활용
+9. Keras 활용(1) - CNN
+10. Keras 활용(2) - RNN(LSTM)
 
 강의 계획 기준으로 목차를 작성하였습니다. 실제 강의 내용을 반영하여 수정 예정입니다.
 (강의 일정 : 2019.3.4 ~ 2019.4.26)
