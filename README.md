@@ -35,7 +35,7 @@
 1. 군집화 - KMeans ([Code](lecture29-군집화_KMeans.ipynb))
 1. 군집화 - 어휘 클러스터, 시각화 ([Code1](lecture30-군집화-어휘_클러스터_시각화(29강_포함).ipynb)) ([Code2](lecture30-project6-뉴스데이터_클러스터_시각화.ipynb))
 1. 특강 - 영상인식 사례, 딥러닝 실습 ([Code1](lecture31-케라스_창시자에게_배우는_딥러닝-2.1-a-first-look-at-a-neural-network.ipynb)) ([Code2](lecture31-케라스_창시자에게_배우는_딥러닝-5.1-introduction-to-convnets.ipynb))
-1. 토픽분석 - LSA_SVD ([자료](./documents/32.Latent_Semantic_Indexing.pdf)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
+1. 토픽분석 - LSA_SVD ([자료2](./documents/32.Latent_Semantic_Indexing.pdf)) ([자료2](./documents/32.20190416(인공지능%20고급반).html)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
 1. 토픽분석 - LDA
 1. 프로젝트 최신 트렌드 분석
 1. 감성분석 - 감성사전
