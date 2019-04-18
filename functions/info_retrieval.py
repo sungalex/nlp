@@ -5,10 +5,12 @@ Information Retrieval(정보검색) 관련 함수를 정의 합니다.
 버지니아대학의 "CS 4501: Information Retrieval" 과정을 참고하여 색인, 질의 관련 함수를 구현 했습니다.
 버지니아대학 강의 사이트 : http://www.cs.virginia.edu/~hw5x/Course/IR2015/_site/lectures/
 '''
+import os
 import re
 from string import punctuation
 from collections import defaultdict
 from math import log10
+import pickle
 
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -263,12 +265,12 @@ def inverted_index_with_tf(collection):
     #   -> 동일한 term의 첫번째 posting_data에는 다음주소 부분에 "None" 값 할당
     #   -> global_lexicon이 마지막 posting_data의 index 값을 저장하고 있음
     #   -> global_posting의 빈도는 tf(Term Frequency) : max_tf 값
-    #   -> evaluate_idf()로 idf 값을 계산 시, global_posting(posting_data)의 빈도에 tfidf 값이 할당됨
     '''
     global_lexicon = dict()
     global_document = list()
     global_posting = list()
     dtm = defaultdict(lambda: defaultdict(int))
+    dtm_dict = dict()
     posting_idx = 0
 
     for doc_idx, (document_name, lexicon) in enumerate(collection):
@@ -305,7 +307,11 @@ def inverted_index_with_tf(collection):
         if posting_data[3] is None:
             global_posting[i][3] = -1
 
-    return global_lexicon, global_posting, global_document, dtm
+    # defaultdict를 pickle로 저장 가능한 dict로 변환
+    for doc, tf in dtm.items():
+        dtm_dict[doc] = tf
+    
+    return global_lexicon, global_posting, global_document, dtm_dict
 
 
 def get_tdm_from_dtm(dtm):
@@ -324,6 +330,7 @@ def get_tdm_from_dtm(dtm):
         }
     '''
     tdm = defaultdict(lambda: defaultdict(int))
+    tdm_dict = dict()
     
     for filename, termlist in dtm.items():   # dtm : [filename][term][frequency]
         # max_freq = max(termlist.values())
@@ -331,7 +338,11 @@ def get_tdm_from_dtm(dtm):
         for term, freq in termlist.items():
             tdm[term][filename] = freq    # max_tf(freq, max_freq, 0)
             
-    return tdm
+    # defaultdict를 pickle로 저장 가능한 dict로 변환
+    for term, file_freq in tdm.items():
+        tdm_dict[term] = file_freq
+    
+    return tdm_dict
 
 
 def tdm2twm(tdm, global_document):
@@ -342,7 +353,9 @@ def tdm2twm(tdm, global_document):
     '''
     document_count = len(global_document)
     twm = defaultdict(lambda: defaultdict(float))
-    dvw = defaultdict(lambda: defaultdict(float))    # document vector weight
+    dtw = defaultdict(lambda: defaultdict(float))    # document vector weight
+    twm_dict = dict()
+    dtw_dict = dict()
 
     for term, tf_list in tdm.items():
         df = len(tf_list)
@@ -351,9 +364,16 @@ def tdm2twm(tdm, global_document):
         
         for filename, tf in tf_list.items():
             twm[term][filename] = tf * idf       # weight
-            dvw[filename][term] = twm[term][filename]  ** 2
-        
-    return twm, dvw
+            dtw[filename][term] = twm[term][filename]  ** 2
+    
+    # defaultdict를 pickle로 저장 가능한 dict로 변환
+    for term, file_weight in twm.items():
+        twm_dict[term] = file_weight
+    
+    for filename, term_weight in dtw.items():
+        dtw_dict[filename] = term_weight
+
+    return twm_dict, dtw_dict
 
 
 def evaluate_idf(global_lexicon, global_posting, global_document):
@@ -528,3 +548,11 @@ def result_print(query, result_list, global_document, collection, count=3):
         print("   document:{0}".format(collection[global_document.index(document)]))
     
     return None
+
+
+def save_pickle(pickle_object, save_dir="../naver_news/pickle/"):
+    for pickle_name, pickle_obj in pickle_object.items():
+        file_path = os.path.join(save_dir, pickle_name + ".pickle")
+        with open(file_path, "wb") as f:
+            pickle.dump(pickle_obj, f)
+            print("{0} is saved.".format(file_path))
