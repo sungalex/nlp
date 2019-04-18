@@ -302,6 +302,9 @@ def inverted_index_with_tf(collection):
             posting_data = [lexicon_idx, doc_idx, max_tf(freq, max_freq, 0), before_idx]   # 처음 추가되는 lexicon은 before_idx가 None
             global_posting.append(posting_data)
             posting_idx += 1
+        
+        if doc_idx % 50 == 49:
+            print("{0}개 뉴스 기사 indexing 완료".format(doc_idx+1))
     
     for i, posting_data in enumerate(global_posting):
         if posting_data[3] is None:
@@ -311,6 +314,7 @@ def inverted_index_with_tf(collection):
     for doc, tf in dtm.items():
         dtm_dict[doc] = tf
     
+    print("전체 {0}개 뉴스 기사 indexing 완료".format(doc_idx+1))
     return global_lexicon, global_posting, global_document, dtm_dict
 
 
@@ -550,7 +554,12 @@ def result_print(query, result_list, global_document, collection, count=3):
     return None
 
 
-def save_pickle(pickle_object, save_dir="../naver_news/pickle/"):
+def save_pickle(pickle_object, save_dir="naver_news/pickle/"):
+    '''
+    # pickle로 저장 가능한 Object에 제한이 있음. 
+    # defaultdict(lambda: defaultdict(int)) 내에 있는 lambda 함수 때문에 pickle 저장 시 에러가 발생함
+    # pickle_object를 인자로 전달 시 defaultdict를 일반 dict로 변환해서 호출해야 함
+    '''
     for pickle_name, pickle_obj in pickle_object.items():
         file_path = os.path.join(save_dir, pickle_name + ".pickle")
         with open(file_path, "wb") as f:
