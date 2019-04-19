@@ -36,17 +36,16 @@
 1. 군집화 - 어휘 클러스터, 시각화 ([Code1](lecture30-군집화-어휘_클러스터_시각화(29강_포함).ipynb)) ([Code2](lecture30-project6-뉴스데이터_클러스터_시각화.ipynb))
 1. 특강 - 영상인식 사례, 딥러닝 실습 ([Code1](lecture31-케라스_창시자에게_배우는_딥러닝-2.1-a-first-look-at-a-neural-network.ipynb)) ([Code2](lecture31-케라스_창시자에게_배우는_딥러닝-5.1-introduction-to-convnets.ipynb))
 1. 토픽분석 - LSA_SVD ([자료2](./documents/32.Latent_Semantic_Indexing.pdf)) ([자료2](./documents/32.20190416(인공지능%20고급반).html)) ([Code](lecture32-토픽분석_LSA(Latent_Semantic_Analysis)-SVD(Singular_Value_Decomposition).ipynb))
-1. 토픽분석 - LDA ([Code](lecture33-토픽분석-LDA(Latent_Dirichlet_Allocation).ipynb), 코드 없이 markdown/LaTex으로 만들어진 설명자료 만 포함하고 있음)
-1. 프로젝트 최신 트렌드 분석
+1. 토픽분석 - LDA ([자료](./documents/33.LDA.pdf)) ([Code](lecture33-토픽분석-LDA(Latent_Dirichlet_Allocation).ipynb), 코드 없이 markdown/LaTex으로 만들어진 설명자료 만 포함하고 있음)
+1. 휴강
+1. 토픽분석 - SVD, LDA 실습 ([Code1](lecture35-토픽분석_SVD_Exam.ipynb)) ([Code2](lecture35-LDA_Exam.ipynb))
+1. 특강 - 항공등화시설 딥러닝 , 자연어처리 특허 가치 및 평가, 랜선웨어 탐지
 1. 감성분석 - 감성사전
 1. 감성분석 - PMI, SO
 1. 단어 임베딩
 1. Gensim 활용
-1. Keras 활용(1) - CNN
-1. Keras 활용(2) - RNN(LSTM)
 
-강의 계획 기준으로 목차를 작성하였습니다. 실제 강의 내용을 반영하여 수정 예정입니다.
-(강의 일정 : 2019.3.4 ~ 2019.4.26)
+---
 
 ## functions
 
@@ -57,18 +56,18 @@ jupyter notebook에서 기능을 테스트 했습니다.
 1. [download.py](./functions/download.py) : requests 패키지를 이용한 웹 페이지 다운로드 함수들
     - getDownload(url, params, headers, retries): requests.get() 호출 후 Response 객체를 return
     - postDownload(url, data, headers, retries): requests.post() 호출 후 Response 객체를 return
-1. [search.py](./functions/search.py) : 4대 포탈에서 키워드 검색 후 title과 url을 추출 하는데 도움되는 함수들
-1. [crawling.py](./functions/crawling.py) : crawling에 필요한 함수들(TBD)
+2. [search.py](./functions/search.py) : 4대 포탈에서 키워드 검색 후 title과 url을 추출 하는데 도움되는 함수들
+3. [crawling.py](./functions/crawling.py) : crawling에 필요한 함수들(TBD)
     - getUrls(link, depth): link 페이지에 포함된 url과 depth를 dictionary 형태로 반환
-1. [ppomppu.py](./functions/ppomppu.py) : 뽐뿌게시판 scraping에 필요한 함수들
-1. [naver.py](./functions/naver.py) : naver 뉴스 기사 scraping에 필요한 함수들
-1. [nlp/ngram.py](./functions/nlp/ngram.py) : N-gram 함수 구현 => ngramEojeol(), ngramUmjeol() 함수
-1. [nlp/wpm.py](./functions/nlp/wpm.py) : WPM 구현 => split_terms(), find_ngram(), merge_ngram() 함수
-1. [info_retrieval.py](./functions/info_retrieval.py) : 정보검색 관련 함수
-1. [test/download_module_test.ipynb](./test/download_module_test.ipynb) : download.py에 정의한 함수 테스트
-1. [test/portal_title_and_url_retrieve_test.ipynb](./test/download_module_test.ipynb) : search.py에 정의한 함수 테스트
-1. [test/ppomppu_Poomppu_class_test.ipynb](./test/ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
-1. [test/ppomppu_Freeboard_class_test.ipynb](./test/ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
-1. [test/naver_news_scraping_test.ipynb](./test/naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
-1. [test/information_retrieval_test.ipynb](./test/information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
-1. [test/mail_sraping_test-naver_mail-gmail.ipynb](./test/mail_sraping_test-naver_mail-gmail.ipynb) : mail scraping 기능 테스트
+4. [ppomppu.py](./functions/ppomppu.py) : 뽐뿌게시판 scraping에 필요한 함수들
+5. [naver.py](./functions/naver.py) : naver 뉴스 기사 scraping에 필요한 함수들
+6. [nlp/ngram.py](./functions/nlp/ngram.py) : N-gram 함수 구현 => ngramEojeol(), ngramUmjeol() 함수
+7. [nlp/wpm.py](./functions/nlp/wpm.py) : WPM 구현 => split_terms(), find_ngram(), merge_ngram() 함수
+8. [info_retrieval.py](./functions/info_retrieval.py) : 정보검색 관련 함수
+9. [test/download_module_test.ipynb](./test/download_module_test.ipynb) : download.py에 정의한 함수 테스트
+10. [test/portal_title_and_url_retrieve_test.ipynb](./test/download_module_test.ipynb) : search.py에 정의한 함수 테스트
+11. [test/ppomppu_Poomppu_class_test.ipynb](./test/ppomppu_Poomppu_class_test.ipynb) : ppomppu.py에 정의한 Ppomppu class 테스트
+12. [test/ppomppu_Freeboard_class_test.ipynb](./test/ppomppu_Freeboard_class_test.ipynb) : ppomppu.py에 정의한 PpomppuFreeboard class 테스트
+13. [test/naver_news_scraping_test.ipynb](./test/naver_news_scraping_test.ipynb) : naver.py에 정의한 NewsScraping class 테스트
+14. [test/information_retrieval_test.ipynb](./test/information_retrieval_test.ipynb) : info_retrieval.py에 정의한 함수 테스트
+15. [test/mail_sraping_test-naver_mail-gmail.ipynb](./test/mail_sraping_test-naver_mail-gmail.ipynb) : mail scraping 기능 테스트
