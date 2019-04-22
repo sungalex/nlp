@@ -39,7 +39,7 @@
 1. 토픽분석 - LDA ([자료](./documents/33.LDA.pdf)) ([Code](lecture33-토픽분석-LDA(Latent_Dirichlet_Allocation).ipynb), 코드 없이 markdown/LaTex으로 만들어진 설명자료 만 포함하고 있음)
 1. 휴강
 1. 토픽분석 - SVD, LDA 실습 ([자료](./documents/35.20190419(인공지능%20고급반).html)) ([Code1](lecture35-토픽분석_SVD_Exam.ipynb)) ([Code2](lecture35-LDA_Exam.ipynb))
-1. 특강 - 항공등화시설 딥러닝 , 자연어처리 특허 가치 및 평가, 랜선웨어 탐지 ([Code](lecture36-특강-자연어처리_사례-4차산업혁명_키워드-KISTI_기술기회분석.ipynb))
+1. 특강 - 항공산업 미래기술 예측, 자연어처리 특허 가치 및 평가, 바이오 정보 검색 ([Code](lecture36-특강-자연어처리_사례-4차산업혁명_키워드-KISTI_기술기회분석.ipynb))
 1. 감성분석 - 감성사전
 1. 감성분석 - PMI, SO
 1. 단어 임베딩
