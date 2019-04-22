@@ -218,25 +218,35 @@ def clean_collection(collection):
     return cleaned_collection
 
 
-def extend_lexicon(corpus):
+def get_extended_lexicon(corpus, nouns=False):
     '''
     collection의 document별 content(전처리 된 content)를 받아서 token의 수를 늘려서 lexicon을 반환 합니다.
-        --> token = 어절 + 형태소 + 명사 + 바이그램(음절)
+        --> token = 어절 + 형태소 + 바이그램(음절)
+    
+    nouns=True 이면, 명사, 명사구 만 lexicon으로 추출하여 반환 합니다.
     '''
-    kkma = Kkma()
+    kkma = Kkma().pos
     extended_lexicon = np.array(list())
 
-    term_list = np.array([term for term in np.array(corpus.split()) if len(term) > 1])
-    pos_list = np.array([morphs for morphs in np.array(kkma.morphs(corpus)) if len(morphs) > 1])
-    noun_list = np.array([noun for noun in np.array(kkma.nouns(corpus)) if len(noun) > 1])
-    ngram_list = np.array([_ for token in term_list for _ in ngram.ngramUmjeol(token)])
-
-    extended_lexicon = np.append(extended_lexicon, term_list)
-    extended_lexicon = np.append(extended_lexicon, pos_list)
-    extended_lexicon = np.append(extended_lexicon, noun_list)
-    extended_lexicon = np.append(extended_lexicon, ngram_list)
+    if nouns == False:
+        term_list = np.array([term for term in np.array(corpus.split()) if len(term) > 1])
+        pos_list = np.array([morphs[0] for morphs in np.array(kkma(corpus)) if len(morphs[0]) > 1])
+        ngram_list = np.array([_ for token in term_list for _ in ngram.ngramUmjeol(token)])
+        extended_lexicon = np.append(extended_lexicon, term_list)
+        extended_lexicon = np.append(extended_lexicon, pos_list)
+        extended_lexicon = np.append(extended_lexicon, ngram_list)
+    else:
+        noun_list = np.array([morphs[0] for morphs in np.array(kkma(corpus)) if morphs[1].startswith("N") and len(morphs[0]) > 1])
+        extended_lexicon = np.append(extended_lexicon, noun_list)
 
     return extended_lexicon
+
+
+def extend_lexicon(corpus):
+    '''
+    extend_lexicon()은 get_extended_lexicon()으로 대체 되었습니다.
+    '''
+    return get_extended_lexicon(corpus, nouns=False)
 
 
 def inverted_index_with_tf(collection):
@@ -280,14 +290,14 @@ def inverted_index_with_tf(collection):
 
         # 로컬 영역
         # local_posting => {term1: 빈도, term2: 빈도, ...}
-        local_posting = dict()
+        local_posting = defaultdict(int)
 
         # if 문을 없애기 위해, 0으로 채워진 local_posting을 먼저 만든 후,
         # term이 발생할 때 마다 1씩 더해주는 방식으로 for 문을 두번 반복
         # dtm도 local_posting을 만들 때 같은 로직으로 생성
-        for term in lexicon:
-            local_posting[term] = 0
-            dtm[document_name][term] = 0
+        # for term in lexicon:    # defaultdict()로 선언하면 자동으로 초기화 해줌
+        #     local_posting[term] = 0
+        #     dtm[document_name][term] = 0
 
         for term in lexicon:
             local_posting[term] += 1
@@ -554,14 +564,18 @@ def result_print(query, result_list, global_document, collection, count=3):
     return None
 
 
-def save_pickle(pickle_object, save_dir="naver_news/pickle/"):
+def save_pickle(pickle_object, save_dir="naver_news/pickle/", nouns=False):
     '''
     # pickle로 저장 가능한 Object에 제한이 있음. 
     # defaultdict(lambda: defaultdict(int)) 내에 있는 lambda 함수 때문에 pickle 저장 시 에러가 발생함
     # pickle_object를 인자로 전달 시 defaultdict를 일반 dict로 변환해서 호출해야 함
     '''
     for pickle_name, pickle_obj in pickle_object.items():
-        file_path = os.path.join(save_dir, pickle_name + ".pickle")
+        if nouns == False:
+            file_path = os.path.join(save_dir, pickle_name + ".pickle")
+        else:
+            file_path = os.path.join(save_dir, pickle_name + "-nouns.pickle")
+
         with open(file_path, "wb") as f:
             pickle.dump(pickle_obj, f)
             print("{0} is saved.".format(file_path))
