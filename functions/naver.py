@@ -294,3 +294,36 @@ class NewsScraping():
             content = f.read()
 
         return content
+
+
+class MovieReview():
+
+    def __init__(self):
+        self.movie_point_url = "https://movie.naver.com/movie/point/af/list.nhn?"
+        self.param = {
+            "page": 1
+        }
+        self.movie_review = list()
+
+    def get_site(self, page):
+        self.param["page"] = page
+        html = get_download(self.movie_point_url, params=self.param)
+        dom = BeautifulSoup(html.text, "html.parser")
+        return dom
+    
+    def scraping(self, max_page=1000):
+        self.movie_review = list()
+
+        for page in range(max_page):
+            dom = self.get_site(page)
+            for tag in dom.select(".list_netizen tbody tr"):
+                point = tag.select_one(".point").text.strip()
+                movie_title = tag.select_one(".title a").text.strip()
+                review = tag.select_one(".title").contents[4].strip()
+                review_day = tag.select_one(".author").next_sibling.next_sibling.strip()
+                self.movie_review.append([movie_title, point, review_day, review])
+
+        if page % 100 == 0:
+            print("{0} pages scrapped")
+
+        return self.movie_review
