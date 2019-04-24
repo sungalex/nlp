@@ -314,7 +314,7 @@ class MovieReview():
     def scraping(self, max_page=1000):
         self.movie_review = list()
 
-        for page in range(max_page):
+        for page in range(1, max_page + 1):
             dom = self.get_site(page)
             for tag in dom.select(".list_netizen tbody tr"):
                 point = tag.select_one(".point").text.strip()
@@ -323,7 +323,7 @@ class MovieReview():
                 review_day = tag.select_one(".author").next_sibling.next_sibling.strip()
                 self.movie_review.append([movie_title, point, review_day, review])
 
-        if page % 100 == 0:
-            print("{0} pages scrapped")
+            if page % 100 == 0 and page != 0:
+                print("{0} pages scrapped".format(page))
 
         return self.movie_review
