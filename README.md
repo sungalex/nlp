@@ -41,7 +41,7 @@
 1. 토픽분석 - SVD, LDA 실습 ([자료](./documents/35.20190419(인공지능%20고급반).html)) ([Code1](lecture35-토픽분석_SVD_Exam.ipynb)) ([Code2](lecture35-LDA_Exam.ipynb))
 1. 특강 - 항공산업 미래기술 예측, 자연어처리 특허 가치 및 평가, 바이오 정보 검색 ([Code](lecture36-특강-자연어처리_사례-4차산업혁명_키워드-KISTI_기술기회분석.ipynb))
 1. 감성분석 - 감성사전 ([Code1](lecture37-LDA_Exam_뉴스기사.ipynb)) ([Code2](lecture37-Sentiment_Analysis.ipynb))
-1. 감성분석 - PMI, SO
+1. 감성분석 - PMI(Pointwise Mutual Information), SO(Semantic Orientation) ([자료1](./documents/38.sentiment_videoslides2019-stanford.pdf)) ([자료2](./documents/38.20190424(인공지능%20고급반).html)) ([Code](lecture38-Sentiment_Analysis-영화리뷰분석.ipynb))
 1. 단어 임베딩
 1. Gensim 활용
 
