@@ -43,7 +43,7 @@
 1. 감성분석 - 감성사전 ([Code1](lecture37-LDA_Exam_뉴스기사.ipynb)) ([Code2](lecture37-Sentiment_Analysis.ipynb))
 1. 감성분석 - PMI(Pointwise Mutual Information), SO(Semantic Orientation) ([자료1](./documents/38.sentiment_videoslides2019-stanford.pdf)) ([자료2](./documents/38.20190424(인공지능%20고급반).html)) ([Code](lecture38-Sentiment_Analysis-영화리뷰분석.ipynb))
 1. 단어 임베딩 ([자료](./documents/39.머신러닝의_자연어_처리기술-김홍배.pdf)) ([Code](lecture39-단어_임베딩.ipynb))
-1. Gensim 활용
+1. 영화리뷰 분석 코드 리뷰, 최종평가 ([Code1](영화리뷰수집기.ipynb)) ([Code2](어벤저스_분석.ipynb))
 
 ---
 
